@@ -4,27 +4,19 @@ app = Flask(__name__)  # созжаём объект класса Flask
 
 
 @app.route('/')  # Отслеживание(переход) на главную страницу
+@app.route('/home')
 def main():
-    return "Привет, это главная странца"
+    return "Управление теплицей"
 
 
-@app.route('/reg')
-def registration():
-    return 'Страница регистарации пользователя'
-
-
-@app.route('/history')
+@app.route('/user')
 def history():
-    return 'Показания датчиков теплицы за всё время'
+    return 'Ручное внесение изменений'
 
 
-@app.route('/errors')
-def errors():
-    return 'Ошибки датчиков, поломки датчиков'
-
-@app.route('/Danger')
-def danger():
-    return 'Опасность'
+@app.route('/testimony')
+def testimony():
+    return 'Таблица с показаниями + средняя температура'
 
 
 if __name__ == '__main__':  # условие запуска локального сервера
