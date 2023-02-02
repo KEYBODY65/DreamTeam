@@ -9,25 +9,12 @@ data = requests.get("https://dt.miet.ru/ppo_it/api/temp_hum/<number>")  # кид
 
 
 class Indications(db.Model):
-    data_base = {'temperature_sensor': {  # датчик температуры
-        'id': ' device_id',
-        'temperature': ' temp_value',
-        'humidity': 'hum_value'
-    },
-
-        'auto_door': {  # дверца
-            'state': 'state_value'
-        },
-
-        'WATERING MACHINE': {  # поливалка
-            'id': 'device_id',
-            'state': 'state_value'
-        },
-
-        'humidification system': {  # система увлажнения
-            'state': 'state_value'
-        }}
-
+    """
+        CREATE TABLE IF NOT EXISTS temperature_sensor (id serial4, temperature int, humidity int);
+        CREATE TABLE IF NOT EXISTS auto_door (state bool);
+        CREATE TABLE IF NOT EXISTS "WATERING MACHINE" (id serial4, state bool);
+        CREATE TABLE IF NOT EXISTS "humidification system" (id serial4, state bool);
+    """
 
 @app.route('/')  # Отслеживание(переход) на главную страницу
 @app.route('/home')
