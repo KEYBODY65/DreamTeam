@@ -1,10 +1,10 @@
 from flask import Flask, render_template, url_for
-from flask_sqlalchemy import SQLalchemy
+from flask_sqlalchemy import SQLAlchemy
 import requests
 
 app = Flask(__name__)  # создаём объект класса Flask
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///main.db'
-db = SQLalchemy(app)
+db = SQLAlchemy(app)
 data = requests.get("https://dt.miet.ru/ppo_it/api/temp_hum/<number>")  # кидаем Гет запрос
 
 
@@ -27,10 +27,13 @@ def history():
     return render_template('user.html')
 
 
-@app.route('/testimony')
+@app.route('/history')
 def testimony():
     return render_template('history.html')
 
+@app.route('/control')
+def control():
+    return render_template('control.html')
 
 if __name__ == '__main__':  # условие запуска локального сервера
     app.run(debug=True)  # debug стоит временно, он показывает все ошибки на смой страни
