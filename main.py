@@ -5,7 +5,7 @@ import requests
 
 app = Flask(__name__)  # создаём объект класса Flask
 for i in range(1, 5):
-    data = requests.get(f"https://dt.miet.ru/ppo_it/api/temp_hum/{i}")  # кидаем Гет запрос
+    data = requests.get(f"https://dt.miet.ru/ppo_it/api/temp_hum/{i}").json()  # кидаем Гет запрос
 
 
 def make_a_database():
