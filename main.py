@@ -24,7 +24,7 @@ def main():
 
 @app.route('/user')
 def history():
-    return render_template('user.html')
+    return render_template ('user.html')
 
 
 @app.route('/testimony')
