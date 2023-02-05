@@ -10,6 +10,7 @@ for i in range(1, 5):
 
 
 
+
 @app.route('/')  # Отслеживание(переход) на главную страницу
 @app.route('/home')
 def main():
