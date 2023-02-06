@@ -2,8 +2,6 @@ from db.db_ap import Database_API
 import numpy as np
 import matplotlib.pyplot as plt
 d = Database_API('db/databse.db')
-
-
 def make_chats(id, value, time):
     # d.get_values() отсюда брать значения
     fig2 = plt.figure(figsize=(8, 4))
