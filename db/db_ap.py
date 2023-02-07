@@ -17,8 +17,6 @@ class Database_API:
                 conn.commit()
 
     def create_tables(self):
-        self.connect('DROP TABLE IF EXISTS sensor_id;')
-        self.connect('DROP TABLE IF EXISTS sensor_values;')
         self.connect(
             'CREATE TABLE IF NOT EXISTS sensor_id (name TEXT, id int, CONSTRAINT sensor_id_pk PRIMARY KEY (id));')
         self.connect(
@@ -46,8 +44,8 @@ class Database_API:
                             fetchall=True)
 
 
-# d = Database_API('databse.db')
+d = Database_API('databse.db')
 # d.get_values(1) # Возвращение данных датчика влажности под конкретным айдишником
-# print(d.connect("SELECT * FROM sensor_values", off=False, fetchall=True))
+# d.connect("SELECT * FROM sensor_values", off=False, fetchall=True)
 # d.create_recort(1, 27.3)
 # d.create_tables()

@@ -3,12 +3,12 @@ import requests
 from db.db_ap import Database_API
 db = Database_API('db/databse.db')
 app = Flask(__name__)  # создаём объект класса Flask
+app.config.from_object("config")
+from app import views
 for i in range(1, 5):
     data = requests.get(f"https://dt.miet.ru/ppo_it/api/temp_hum/{i}").json()  # кидаем Гет запрос
     db.create_recort(id_sensor=(i - 1) * 2, values=data['temperature'])
     db.create_recort(id_sensor=(i - 1) * 2 + 1, values=data['humidity'])
-
-
 
 
 @app.route('/')  # Отслеживание(переход) на главную страницу
@@ -17,9 +17,10 @@ def main():
     return render_template('index.html')
 
 
-@app.route('/user')
-def history():
-    return render_template('user.html')
+@app.route('/data_entry', methods=['GET'])
+def data_entry():
+
+    return render_template('dataentry.html')
 
 
 @app.route('/history')
