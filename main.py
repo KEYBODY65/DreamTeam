@@ -1,12 +1,14 @@
-from flask import Flask, render_template
-import requests
+from flask import Flask, render_template, request
+from requests import get
 from db.db_ap import Database_API
+from data_entry import DataEntry
+
 db = Database_API('db/databse.db')
+
 app = Flask(__name__)  # создаём объект класса Flask
-app.config.from_object("config")
-from app import views
+app.config["SECRET_KEY"] = "secret_key"
 for i in range(1, 5):
-    data = requests.get(f"https://dt.miet.ru/ppo_it/api/temp_hum/{i}").json()  # кидаем Гет запрос
+    data = get(f"https://dt.miet.ru/ppo_it/api/temp_hum/{i}").json()  # кидаем Гет запрос
     db.create_recort(id_sensor=(i - 1) * 2, values=data['temperature'])
     db.create_recort(id_sensor=(i - 1) * 2 + 1, values=data['humidity'])
 
@@ -17,15 +19,17 @@ def main():
     return render_template('index.html')
 
 
-@app.route('/data_entry', methods=['GET'])
+@app.route('/data_entry', methods=['GET', 'POST'])
 def data_entry():
-
-    return render_template('dataentry.html')
-
-
-@app.route('/history')
-def testimony():
-    return render_template('history.html')
+    form = DataEntry()
+    if form.submit():
+        id = request.form.get("id_sensor")
+        temperature = request.form.get("temperature")
+        humidification = request.form.get("humidification")
+        if id and temperature and humidification:
+            db.create_recort(id_sensor=int(id), values=int(temperature))
+            db.create_recort(id_sensor=int(id), values=int(humidification))
+    return render_template('dataentry.html', title='Ручное внесение данных', form=form)
 
 
 @app.route('/control')
