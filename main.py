@@ -37,5 +37,9 @@ def control():
     return render_template('control.html')
 
 
+@app.route('/charts')
+def charts():
+    return render_template('charts.html')
+
 if __name__ == '__main__':  # условие запуска локального сервера
     app.run(debug=True)  # debug стоит временно, он показывает все ошибки на самой странице
