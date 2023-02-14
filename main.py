@@ -1,7 +1,8 @@
 from flask import Flask, render_template, request
 from requests import get
 from db.db_ap import Database_API
-from data_entry import DataEntry
+from data_entry import DataEntry, Recharging
+from charts import make_chart_for_temperature, make_chart_for_humidification
 
 db = Database_API('db/databse.db')
 
@@ -39,7 +40,17 @@ def control():
 
 @app.route('/charts')
 def charts():
-    return render_template('charts.html')
+    form = Recharging()
+    if form.recharging:
+        for j in range(1, 6):
+            for i in db.get_values(j):
+                if i['id_sensor'] % 2 == 0:
+                    make_chart_for_humidification(i['val'], i['n_time'])
+                else:
+                    make_chart_for_temperature(i['val'], i['n_time'])
+
+    return render_template('charts.html', form=form)
+
 
 if __name__ == '__main__':  # условие запуска локального сервера
     app.run(debug=True)  # debug стоит временно, он показывает все ошибки на самой странице

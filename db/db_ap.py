@@ -1,5 +1,7 @@
 from db.sqliteplus import sqlite_dict
 import sqlite3
+
+
 class Database_API:
     def __init__(self, name_db):
         self.name_db = name_db
@@ -40,10 +42,11 @@ class Database_API:
     def get_values(self, id_sensor):
         data = self.connect("SELECT * FROM sensor_values WHERE id_sensor=?", params=(id_sensor,), off=False,
                             fetchall=True)
+        return data
 
 
-# d = Database_API('databse.db')
-# d.get_values(1) # Возвращение данных датчика влажности под конкретным айдишником
+d = Database_API('databse.db')
+print(*d.get_values(7), sep='\n')
 # d.connect("SELECT * FROM sensor_values", off=False, fetchall=True)
 # d.create_recort(1, 27.3)
 # d.create_tables()
