@@ -1,0 +1,45 @@
+html, body {
+  height: 100%;
+  width: 100%;
+  background-color: #f3ecec;
+}
+
+.logo {
+  width: 30%;
+  height: 50px;
+  text-align: center;
+  background-color: #001752;
+  border-radius: 7px;
+}
+.logo h1 {
+  margin: 0 auto;
+  color:#ffff;
+  font-family: Andale Mono, monospace;
+  font-size: 24px
+}
+.menu {
+  background-image: url('shablon.jpeg');
+  width: 30%;
+  height: 700px;
+  opacity: 0.5;
+  border-radius: 7px;
+}
+.nav {
+  margin-left: 15px;
+  margin-top: 0;
+}
+li {
+  margin-bottom: 4em;
+  font-size: 26px;
+  display: block;
+}
+
+a {
+  text-decoration: none;
+  color: #000000;
+}
+a:hover{
+  background-color: #cae5f2;
+  border-radius: 10px;
+  height: 15px;
+}

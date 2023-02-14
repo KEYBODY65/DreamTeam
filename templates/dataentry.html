@@ -2,25 +2,25 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title> {{ title }} </title>
 </head>
 <body>
-<div class="registration-cssave">
-    <form method="post">
-        <h3 class="text-center"> Ручное внесение данных </h3>
-        <div class="form-group">
-            <input class="form-control item" type="number" name="id_sensor" minlength="6" id="id_sensor" placeholder="Номер датчика" required>
-        </div>
-        <div class="form-group">
-            <input class="form-control item" type="number" name="temperature" maxlength="4" minlength="4" pattern="^[a-zA-Z0-9_.-]*$" id="temperature" placeholder="Температрура" required>
-        </div>
-        <div class="form-group">
-            <input class="form-control item" type="number" name="humidification" minlength="6" id="humidification" placeholder="Влажность" required>
-        </div>
-        <div class="form-group">
-            <button class="btn btn-primary btn-block create-account" type="submit">Внести данные</button>
-        </div>
-    </form>
-</div>
+    <div class="registration-cssave">
+        <form method="post">
+            <h3 class="text-center"> Ручное внесение данных </h3>
+            <div class="form-group">
+                <input class="form-control item" type="number" name="id_sensor" minlength="6" id="id_sensor" placeholder="Номер датчика" required>
+            </div>
+            <div class="form-group">
+                <input class="form-control item" type="number" name="temperature" maxlength="4" minlength="4" pattern="^[a-zA-Z0-9_.-]*$" id="temperature" placeholder="Температрура" required>
+            </div>
+            <div class="form-group">
+                <input class="form-control item" type="number" name="humidification" minlength="6" id="humidification" placeholder="Влажность" required>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary btn-block create-account" type="submit">Внести данные</button>
+            </div>
+        </form>
+    </div>
 </body>
 </html>
