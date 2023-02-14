@@ -29,7 +29,7 @@ def data_entry():
         if id and temperature and humidification:
             db.create_recort(id_sensor=int(id), values=int(temperature))
             db.create_recort(id_sensor=int(id), values=int(humidification))
-    return render_template('dataentry.html', title='Ручное внесение данных', form=form, menu='index.html')
+    return render_template('dataentry.html', title='Ручное внесение данных', form=form)
 
 
 @app.route('/control')
