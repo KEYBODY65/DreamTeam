@@ -5,7 +5,7 @@ from data_entry import DataEntry, Recharging
 from charts import makes_charts
 
 db = Database_API('db/databse.db')
-
+mc = makes_charts()
 app = Flask(__name__)  # создаём объект класса Flask
 app.config["SECRET_KEY"] = "secret_key"
 for i in range(1, 5):
@@ -45,9 +45,9 @@ def charts():
         for i in range(1, 8):
             for datas in db.get_values(i):
                 if i % 2 == 0:
-                    makes_charts.make_chart_for_humidification(datas['val'], datas['n_time'])
+                     mc.make_chart_for_humidification(datas['val'], datas['n_time'])
                 else:
-                    makes_charts.make_chart_for_temperature(datas['val'], datas['n_time'])
+                    mc.make_chart_for_temperature(datas['val'], datas['n_time'])
 
     return render_template('charts.html', form=forma, title='Управление')
 

@@ -1,9 +1,9 @@
 import pandas as pd
 import matplotlib.pyplot as plt
-
+import multiprocessing
 
 class makes_charts:
-    def make_chart_for_temperature(data, time):
+    def make_chart_for_temperature(self, data, time):
         datas = []
         times = []
         datas.append(data)
@@ -23,8 +23,9 @@ class makes_charts:
         ax.grid()
 
         plt.title('Просмотр температуры 1-го датчика')
+        plt.show()
 
-    def make_chart_for_humidification(data, time):
+    def make_chart_for_humidification(self, data, time):
         datas = []
         times = []
         datas.append(data)
@@ -45,3 +46,5 @@ class makes_charts:
         ax.set_ylabel('Значение')
 
         plt.show()
+
+
