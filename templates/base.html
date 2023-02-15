@@ -1,12 +1,27 @@
 <!DOCTYPE html>
-<html lang = 'ru'>
+<html lang="ru">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
-  <title> Главная страница</title>
-  <link rel="stylesheet" href="../static/style.css"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> {{ title }}</title>
+    <link href="../static/css/style.css" rel="stylesheet">
 </head>
-{% block start_block %}
-{% endblock %}
-</html>
+<body>
+<main>
 
+    {% block main_content %}
+    {% endblock %}
+
+    {% block dataentry_block %}
+    {% endblock %}
+</main>
+</body>
+<footer>
+    <h2> Обратная связь </h2>
+    <br>
+    <ul>
+        <li> <h4> Example@gmail.com </h4> </li>
+    </ul>
+</footer>
+
+</html>

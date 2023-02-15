@@ -17,7 +17,7 @@ for i in range(1, 5):
 @app.route('/')  # Отслеживание(переход) на главную страницу
 @app.route('/home')
 def main():
-    return render_template('index.html')
+    return render_template('index.html', title='Домашняя страница')
 
 
 @app.route('/data_entry', methods=['GET', 'POST'])
@@ -35,7 +35,7 @@ def data_entry():
 
 @app.route('/control')
 def control():
-    return render_template('control.html')
+    return render_template('control.html', title='Внесение данных')
 
 
 @app.route('/charts')
@@ -49,7 +49,7 @@ def charts():
                 else:
                     makes_charts.make_chart_for_temperature(datas['val'], datas['n_time'])
 
-    return render_template('charts.html', form=forma)
+    return render_template('charts.html', form=forma, title='Управление')
 
 
 if __name__ == '__main__':  # условие запуска локального сервера

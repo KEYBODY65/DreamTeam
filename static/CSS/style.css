@@ -1,5 +1,5 @@
 html, body {
-  height: 700px;
+  height: 100%;
   width: 100%;
   background-color: #f3ecec;
 }
@@ -18,11 +18,11 @@ html, body {
   font-size: 24px
 }
 .menu {
-  background-image: url('shablon.jpeg');
+  background-image: url('../pictures/mountains.jpeg');
   width: 30%;
-  height: 700px;
+  height: 100%;
   border-radius: 7px;
-  position: relative;
+  position: absolute;
 }
 .nav {
   margin-left: 15px;
@@ -44,7 +44,7 @@ a:hover{
 }
 
 .registration-cssave{
-  padding:8% 10% 10% 45%;
+  padding: 0 10% 10% 45%;
   position: relative;
   text-align: center;
   max-width: 576px;
@@ -78,5 +78,16 @@ a:hover{
   border:none;
   color:white;
   margin-top:20px;
+}
+footer {
+    background-color: black;
+    color: #ffff;
+    padding-bottom: 20px;
+    position: relative;
+    bottom: 0;
+}
+footer h2 {
+    text-align: center;
+    font-family: sans-serif;
 }
 
