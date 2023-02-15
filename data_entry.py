@@ -10,5 +10,11 @@ class DataEntry(FlaskForm):
     submit = SubmitField("Внести данные")
 
 
+class Control(FlaskForm):
+    fork_drive_submit = SubmitField("Открыть дверцу / Закрыть дверцу")
+    watering_submit = SubmitField("Включить Полив / Выключить полив")
+    total_hum_submit = SubmitField("Увалжанить / Не Увлажнять")
+
+
 class Recharging(FlaskForm):
     recharging = SubmitField("Обновить")

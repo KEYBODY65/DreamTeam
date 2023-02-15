@@ -2,7 +2,7 @@ from flask import Flask, render_template, request
 from requests import get
 from db.db_ap import Database_API
 from data_entry import DataEntry, Recharging
-from charts import make_chart_for_temperature, make_chart_for_humidification
+from charts import makes_charts
 
 db = Database_API('db/databse.db')
 
@@ -24,12 +24,12 @@ def main():
 def data_entry():
     form = DataEntry()
     if form.submit():
-        id = request.form.get("id_sensor")
+        idi = request.form.get("id_sensor")
         temperature = request.form.get("temperature")
         humidification = request.form.get("humidification")
-        if id and temperature and humidification:
-            db.create_recort(id_sensor=int(id), values=int(temperature))
-            db.create_recort(id_sensor=int(id), values=int(humidification))
+        if idi and temperature and humidification:
+            db.create_recort(id_sensor=int(idi), values=int(temperature))
+            db.create_recort(id_sensor=int(idi), values=int(humidification))
     return render_template('dataentry.html', title='Ручное внесение данных', form=form)
 
 
@@ -40,16 +40,16 @@ def control():
 
 @app.route('/charts')
 def charts():
-    form = Recharging()
-    if form.recharging:
-        for j in range(1, 6):
-            for i in db.get_values(j):
-                if i['id_sensor'] % 2 == 0:
-                    make_chart_for_humidification(i['val'], i['n_time'])
+    forma = Recharging()
+    if forma.recharging():
+        for i in range(1, 8):
+            for datas in db.get_values(i):
+                if i % 2 == 0:
+                    makes_charts.make_chart_for_humidification(datas['val'], datas['n_time'])
                 else:
-                    make_chart_for_temperature(i['val'], i['n_time'])
+                    makes_charts.make_chart_for_temperature(datas['val'], datas['n_time'])
 
-    return render_template('charts.html', form=form)
+    return render_template('charts.html', form=forma)
 
 
 if __name__ == '__main__':  # условие запуска локального сервера
