@@ -46,7 +46,7 @@ class Database_API:
 
 
 d = Database_API('databse.db')
-print(*d.get_values(7), sep='\n')
+d.get_values(7)
 # d.connect("SELECT * FROM sensor_values", off=False, fetchall=True)
 # d.create_recort(1, 27.3)
 # d.create_tables()
