@@ -22,7 +22,7 @@ html, body {
   width: 30%;
   height: 700px;
   border-radius: 7px;
-  position: absolute;
+  position: relative;
 }
 .nav {
   margin-left: 15px;

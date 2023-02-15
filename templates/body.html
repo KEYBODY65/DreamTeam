@@ -1,0 +1,21 @@
+{% block header_block %}
+<body>
+    <main>
+        <link rel="stylesheet" href="../static/style.css"/>
+        <div class = 'tmain'>
+            <div class = 'logo'>
+                <h1> Кейс - №8 </h1>
+            </div>
+            <div class = 'menu'>
+              <ul class = 'nav'>
+                <li><a href = '/home'> Главная страница </a></li>
+                <li><a href = '/data_entry'> Внести данные </a></li>
+                <li><a href = '/charts'> Графики</a></li>
+                <li><a href = '/control'> Управление </a></li>
+              </ul>
+            </div>
+        </div>
+        {% block main_block %}
+        {% endblock %}
+    </main>
+</body>
