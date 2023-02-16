@@ -11,9 +11,24 @@ class DataEntry(FlaskForm):
 
 
 class Control(FlaskForm):
-    fork_drive_submit = SubmitField("Открыть дверцу / Закрыть дверцу")
-    watering_submit = SubmitField("Включить Полив / Выключить полив")
-    total_hum_submit = SubmitField("Увалжанить / Не Увлажнять")
+    hum_on = SubmitField('Увалжанить')
+    hum_off = SubmitField('Прекратить увдажнение')
+    door_open = SubmitField('Открыть')
+    door_close = SubmitField('Заркыть')
+    watringa1 = SubmitField('Полить (Бороздка №1)')
+    watringa1_off = SubmitField('Выключить полив (Бороздка №1)')
+    watringa2 = SubmitField('Полить (Бороздка №2)')
+    watringa2_off = SubmitField('Выключить полив (Бороздка №1)')
+    watringa3 = SubmitField('Полить (Бороздка №3)')
+    watringa3_off = SubmitField('Выключить полив (Бороздка №1)')
+    watringa4 = SubmitField('Полить (Бороздка №4)')
+    watringa4_off = SubmitField('Выключить полив (Бороздка №1)')
+    watringa5 = SubmitField('Полить (Бороздка №5)')
+    watringa5_off = SubmitField('Выключить полив (Бороздка №1)')
+    watringa6 = SubmitField('Полить (Бороздка №6)')
+    watringa6_off = SubmitField('Выключить полив (Бороздка №1)')
+    watringa_on_all = SubmitField('Включить полив всех бороздок')
+    watringa_off_all = SubmitField('Выключить полив всех бороздок')
 
 
 class Recharging(FlaskForm):

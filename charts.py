@@ -1,50 +1,47 @@
-import pandas as pd
 import matplotlib.pyplot as plt
-import multiprocessing
+
 
 class makes_charts:
     def make_chart_for_temperature(self, data, time):
         datas = []
         times = []
-        datas.append(data)
-        times.append(time)
-        print(times)
         if time == '00:00:00':
             datas.clear()
             times.clear()
-        df = pd.DataFrame({
-            'Время': times,
-            'Температура, °C': datas,
-        })
-        ax = df.plot(x="Время", y="Температура, °C", kind="bar", color="orangered")
+        else:
+            datas.append(data)
+            times.append(time)
+        time = times
+        value = datas
 
-        ax.set_ylabel('Значение')
+        plt.plot(time, value, color='orangered', marker='o', markersize=7)
 
-        ax.grid()
+        plt.legend(title='Температура, °C', facecolor='oldlace', edgecolor='orangered')
 
-        plt.title('Просмотр температуры 1-го датчика')
-        plt.show()
+        plt.xlabel('Время')
+        plt.ylabel('Значение')
+        plt.title('Просмотр  температуры в теплице 1-го датчика')
+
+        plt.savefig('graph_temperature.png')
 
     def make_chart_for_humidification(self, data, time):
         datas = []
         times = []
-        datas.append(data)
-        times.append(time)
         if time == '00:00:00':
             datas.clear()
             times.clear()
-        df = pd.DataFrame({
-            'Время': times,
-            'Влажность, кг/м3': datas,
-        })
-        ax = df.plot(x="Время", y="Влажность, кг/м3", kind='bar')
+        else:
+            datas.append(data)
+            times.append(time)
+        time = times
+        value = datas
 
+        plt.plot(time, value, color='skyblue', marker='o', markersize=7)
+
+        plt.legend(title='Влажность, кг/м3', facecolor='oldlace', edgecolor='skyblue')
+
+        plt.xlabel('Время')
+        plt.ylabel('Значение')
         plt.title('Просмотр  влажности в теплице 1-го датчика')
 
-        ax.grid()
-
-        ax.set_ylabel('Значение')
-
-        plt.show()
-
-
+        plt.savefig('graph_humidity.png')
