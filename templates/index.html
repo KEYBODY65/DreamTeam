@@ -1,15 +1,8 @@
-<!DOCTYPE html>
-<html lang = 'ru'>
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
-  <title> Главная страница</title>
-  <link rel="stylesheet" href="../static/style.css"/>
-</head>
-<body>
-  <div class = 'tmain'>
+{% extends 'base.html' %}
+{% block main_content %}
+<div class = 'tmain'>
     <div class = 'logo'>
-      <h1> Кейс - №8 </h1>
+        <h1> Кейс - №8 </h1>
     </div>
     <div class = 'menu'>
       <ul class = 'nav'>
@@ -19,6 +12,5 @@
         <li><a href = '/control'> Управление </a></li>
       </ul>
     </div>
-  </div>
-</body>
-</html>
+</div>
+{% endblock %}
