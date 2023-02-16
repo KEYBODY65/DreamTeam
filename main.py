@@ -54,7 +54,7 @@ def control():
         patch('https://dt.miet.ru/ppo_it/api/watering', params={'id': id, 'state': on_w})
         if formas.watringa1_off():
             off_w = 0
-            id = 12
+            id = 1
             patch('https://dt.miet.ru/ppo_it/api/watering', params={'id': id, 'state': off_w})
     elif formas.watringa2():
         on_w = 1
