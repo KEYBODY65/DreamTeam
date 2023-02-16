@@ -5,7 +5,7 @@ html, body {
 }
 
 .logo {
-  width: 30%;
+  width: 20%;
   height: 50px;
   text-align: center;
   background-color: #001752;
@@ -15,14 +15,14 @@ html, body {
   margin: 0 auto;
   color:#ffff;
   font-family: Andale Mono, monospace;
-  font-size: 24px
+  font-size: 30px
 }
 .menu {
   background-image: url('../pictures/mountains.jpeg');
-  width: 30%;
+  width: 20%;
   height: 100%;
   border-radius: 7px;
-  position: absolute;
+  position: relative;
 }
 .nav {
   margin-left: 15px;
@@ -44,10 +44,11 @@ a:hover{
 }
 
 .registration-cssave{
-  padding: 0 10% 10% 45%;
-  position: relative;
+  padding: 0 10% 10% 45%; /* установка положения в центре нашей рабочей области */
+  position: absolute;
   text-align: center;
   max-width: 576px;
+  bottom: 180px;
 }
 
 .registration-cssave form {
@@ -82,12 +83,14 @@ a:hover{
 footer {
     background-color: black;
     color: #ffff;
-    padding-bottom: 20px;
-    position: relative;
-    bottom: 0;
+    position: static;
+    width: 100%;
+    height: 200px;
+    padding-bottom: 30px;
 }
 footer h2 {
     text-align: center;
     font-family: sans-serif;
 }
+
 

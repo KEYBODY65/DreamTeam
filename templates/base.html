@@ -3,15 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> {{ title }}</title>
+    <title> {{ title }} </title>
     <link href="../static/css/style.css" rel="stylesheet">
 </head>
 <body>
 <main>
-
-    {% block main_content %}
-    {% endblock %}
-
+    <div class = 'tmain'>
+        <div class = 'logo'>
+            <h1> Кейс - №8 </h1>
+        </div>
+        <div class = 'menu'>
+          <ul class = 'nav'>
+            <li><a href = '/home'> Главная страница </a></li>
+            <li><a href = '/data_entry'> Внести данные </a></li>
+            <li><a href = '/charts'> Графики</a></li>
+            <li><a href = '/control'> Управление </a></li>
+          </ul>
+        </div>
+    </div>
     {% block dataentry_block %}
     {% endblock %}
 </main>
@@ -23,5 +32,4 @@
         <li> <h4> Example@gmail.com </h4> </li>
     </ul>
 </footer>
-
 </html>
