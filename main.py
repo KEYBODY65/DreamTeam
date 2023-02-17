@@ -119,7 +119,7 @@ def charts():
                 else:
                     mc.make_chart_for_temperature(datas['val'], datas['n_time'])
 
-    return render_template('charts.html', form=forma)
+    return render_template('charts.html', title='Таблицы', form=forma)
 
 
 if __name__ == '__main__':  # условие запуска локального сервера

@@ -49,11 +49,12 @@ a:hover{
 }
 
 .registration-cssave{
-  padding: 0 10% 10% 45%; /* установка положения в центре нашей рабочей области */
+  padding: 8% 20% 8% 20%; /* установка положения в центре нашей рабочей области */
   position: absolute;
   text-align: center;
-  max-width: 576px;
-  bottom: 180px;
+  width: 30%;
+  bottom: 19%;
+  left: 25%;
 }
 
 .registration-cssave form {
@@ -97,5 +98,20 @@ footer h2 {
     text-align: center;
     font-family: sans-serif;
 }
-
+.button_place {
+  position: absolute;
+  border: 1px solid black;
+  bottom: 19%;
+  left: 25%;
+  width: 70%;
+  height: 80%;
+}
+.button {
+    background-color:#001752;
+    color: white;
+    font-weight:bold;
+    border-radius: 10px;
+    font-size:18px;
+    box-shadow:4px 4px 15px rgba(0, 0.6, 0.6, 0.6);
+}
 
