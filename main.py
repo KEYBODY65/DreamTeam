@@ -1,10 +1,10 @@
 from flask import Flask, render_template, request
-from requests import get, patch
+from requests import get
 from db.db_ap import Database_API
 from data_entry import DataEntry, Recharging, Control
 from charts import makes_charts
 
-db = Database_API('db/databse.db')
+db = Database_API('./db/database.db')
 mc = makes_charts()
 app = Flask(__name__)  # создаём объект класса Flask
 app.config["SECRET_KEY"] = "secret_key"
@@ -17,7 +17,7 @@ for i in range(1, 5):
 @app.route('/')  # Отслеживание(переход) на главную страницу
 @app.route('/home')
 def main():
-    return render_template('index.html')
+    return render_template('index.html', title='Главная страница')
 
 
 @app.route('/data_entry', methods=['GET', 'POST'])
@@ -35,77 +35,7 @@ def data_entry():
 
 @app.route('/control')
 def control():
-    formas = Control()
-    if formas.door_open():
-        open = 1
-        patch('https://dt.miet.ru/ppo_it/api/fork_drive/ ', params={'state': open})
-        if formas.door_close():
-            close = 0
-            patch('https://dt.miet.ru/ppo_it/api/fork_drive/ ', params={'state': close})
-    elif formas.hum_on():
-        on = 1
-        patch('https://dt.miet.ru/ppo_it/api/total_hum', params={'state': on})
-        if formas.hum_off():
-            off = 0
-            patch('https://dt.miet.ru/ppo_it/api/total_hum', params={'state': off})
-    elif formas.watringa1():
-        on_w = 1
-        id = 1
-        patch('https://dt.miet.ru/ppo_it/api/watering', params={'id': id, 'state': on_w})
-        if formas.watringa1_off():
-            off_w = 0
-            id = 1
-            patch('https://dt.miet.ru/ppo_it/api/watering', params={'id': id, 'state': off_w})
-    elif formas.watringa2():
-        on_w = 1
-        id = 2
-        patch('https://dt.miet.ru/ppo_it/api/watering', params={'id': id, 'state': on_w})
-        if formas.watringa2_off():
-            off_w = 0
-            id = 2
-            patch('https://dt.miet.ru/ppo_it/api/watering', params={'id': id, 'state': off_w})
-    elif formas.watringa3():
-        on_w = 1
-        id = 3
-        patch('https://dt.miet.ru/ppo_it/api/watering', params={'id': id, 'state': on_w})
-        if formas.watringa3_off():
-            off_w = 0
-            id = 3
-            patch('https://dt.miet.ru/ppo_it/api/watering', params={'id': id, 'state': off_w})
-    elif formas.watringa4():
-        on_w = 1
-        id = 4
-        patch('https://dt.miet.ru/ppo_it/api/watering', params={'id': id, 'state': on_w})
-        if formas.watringa4_off():
-            off_w = 0
-            id = 4
-            patch('https://dt.miet.ru/ppo_it/api/watering', params={'id': id, 'state': off_w})
-    elif formas.watringa5():
-        on_w = 1
-        id = 5
-        patch('https://dt.miet.ru/ppo_it/api/watering', params={'id': id, 'state': on_w})
-        if formas.watringa5_off():
-            off_w = 0
-            id = 5
-            patch('https://dt.miet.ru/ppo_it/api/watering', params={'id': id, 'state': off_w})
-    elif formas.watringa6():
-        on_w = 1
-        id = 6
-        patch('https://dt.miet.ru/ppo_it/api/watering', params={'id': id, 'state': on_w})
-        if formas.watringa6_off():
-            off_w = 0
-            id = 6
-            patch('https://dt.miet.ru/ppo_it/api/watering', params={'id': id, 'state': off_w})
-    elif formas.watringa_on_all():
-        on_w = 1
-        for i in range(1, 7):
-            patch('https://dt.miet.ru/ppo_it/api/watering', params={'id': i, 'state': on_w})
-        if formas.watringa_off_all():
-            off_w = 0
-            for j in range(1, 7):
-                patch('https://dt.miet.ru/ppo_it/api/watering', params={'id': j, 'state': off_w})
-
-    return render_template('control.html', title='Ручное управление теплицей', form=formas)
+    return render_template('control.html', title='')
 
 
 @app.route('/charts')
@@ -119,7 +49,7 @@ def charts():
                 else:
                     mc.make_chart_for_temperature(datas['val'], datas['n_time'])
 
-    return render_template('charts.html', form=forma)
+    return render_template('charts.html', form=forma, title='Графики')
 
 
 if __name__ == '__main__':  # условие запуска локального сервера

@@ -20,7 +20,8 @@ class Database_API:
         self.connect(
             'CREATE TABLE IF NOT EXISTS sensor_id (name TEXT, id int, CONSTRAINT sensor_id_pk PRIMARY KEY (id));')
         self.connect(
-            'CREATE TABLE IF NOT EXISTS sensor_values (id_sensor int, id int, val real, n_time time, CONSTRAINT sensor_values_pk PRIMARY KEY (id), CONSTRAINT sensor_id_fk FOREIGN KEY (id_sensor) REFERENCES sensor_id(id));')
+            'CREATE TABLE IF NOT EXISTS sensor_values (id_sensor int, id int, val real, n_time time, CONSTRAINT'
+            ' sensor_values_pk PRIMARY KEY (id), CONSTRAINT sensor_id_fk FOREIGN KEY (id_sensor) REFERENCES sensor_id(id));')
         self.connect('INSERT INTO sensor_id (name, id) VALUES(\'humidification_sensor1\', 0);')
         self.connect('INSERT INTO sensor_id (name, id) VALUES(\'tem_sensor1\', 1);')
         self.connect('INSERT INTO sensor_id (name, id) VALUES(\'humidification_sensor2\', 2);')
@@ -46,7 +47,8 @@ class Database_API:
         return data
 
 
-# d = Database_API('databse.db')
+# d = Database_API('database.db')
+# d.create_tables()
 # print(*d.get_values(7), sep='\n')
 # d.connect("SELECT * FROM sensor_values", off=False, fetchall=True)
 # d.create_recort(1, 27.3)

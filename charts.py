@@ -21,8 +21,8 @@ class makes_charts:
         plt.xlabel('Время')
         plt.ylabel('Значение')
         plt.title('Просмотр  температуры в теплице 1-го датчика')
-
-        plt.savefig('graph_temperature.png')
+        plt.grid()
+        plt.savefig('static/temperature_charts/graph_temperature.png')
 
     def make_chart_for_humidification(self, data, time):
         datas = []
@@ -43,5 +43,5 @@ class makes_charts:
         plt.xlabel('Время')
         plt.ylabel('Значение')
         plt.title('Просмотр  влажности в теплице 1-го датчика')
-
-        plt.savefig('graph_humidity.png')
+        plt.grid()
+        plt.savefig('static/humidity/graph_humidity.png')
