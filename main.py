@@ -48,7 +48,6 @@ def charts():
                     mc.make_chart_for_humidification(datas['val'], datas['n_time'])
                 else:
                     mc.make_chart_for_temperature(datas['val'], datas['n_time'])
-
     return render_template('charts.html', form=forma, title='Графики')
 
 
