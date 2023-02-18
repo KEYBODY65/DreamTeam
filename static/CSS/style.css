@@ -1,8 +1,8 @@
 html, body {
     margin: 0 auto;
-  height: 100%;
-  width: 100%;
-  background-image: url('../pictures/fon.jpeg');
+    height: 100%;
+    width: 100%;
+    background-image: url('../pictures/fon.jpeg');
 }
 
 .logo {
@@ -27,6 +27,7 @@ html, body {
   position: relative;
   margin: 0;
   box-shadow:4px 4px 15px rgba(0, 0, 0, 0.2);
+  font-weight: bold;
 }
 .nav {
   margin-left: 15px;
@@ -41,7 +42,6 @@ li {
 a {
   text-decoration: none;
   color: #000000;
-  font-family: bold;
 }
 a:hover{
   border-radius: 10px black;
@@ -87,15 +87,23 @@ a:hover{
   color:white;
   margin-top:20px;
 }
-footer {
-    background-color: black;
+.bottom_footer {
+    background-color: #0f264b;
     color: #ffff;
     position: static;
     width: 100%;
-    height: 130px;
+    height: 199px;
+    z-index: 1;
 }
-footer h2 {
-    text-align: center;
+
+.wave_footer img {
+    overflow: hide;
+    bottom: 14%;
+    width: 100%;
+    position: absolute;
+}
+footer h2, h4 {
+    position: absolute;
     font-family: sans-serif;
 }
 .button_place {
@@ -114,4 +122,5 @@ footer h2 {
     font-size:18px;
     box-shadow:4px 4px 15px rgba(0, 0.6, 0.6, 0.6);
 }
+
 
