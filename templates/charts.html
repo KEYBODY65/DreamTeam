@@ -1,31 +1,4 @@
 {% extends 'base.html' %}
 {% block charts_block %}
-<a href="#"><img src="" alt=""></a>
-<canvas id="mycharts"></canvas>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
-<script>
-    let ctx = document.querySelector('#myChart').getContexts('2d');
-    let myChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: [1, 2, 3, 4, 5],
-            datasets: [{
-                label 'График 1':
-                data: [50, 60, 70, 80, 90],
-                backgroudColor: [
-                    'white'
-                ],
-                borderColor: [
-                    '#34eb80'
-                    '#07f269',
-                    '#58f599',
-                    '#72f2a7',
-                    '#8ff7bb'
-                ],
-                borderWidth: 4
-            }]
-        },
-        options: {}
-    });
-</script>
+
 {% endblock %}
