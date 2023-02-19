@@ -110,16 +110,7 @@ def control():
 
 @app.route('/charts')
 def charts():
-    forma = Recharging()
-    if forma.recharging():
-        for i in range(1, 8):
-            for datas in db.get_values(i):
-                if i % 2 == 0:
-                    mc.make_chart_for_humidification(datas['val'], datas['n_time'])
-                else:
-                    mc.make_chart_for_temperature(datas['val'], datas['n_time'])
-
-    return render_template('charts.html', title='Таблицы', form=forma)
+    return render_template('charts.html', title='Таблицы')
 
 
 if __name__ == '__main__':  # условие запуска локального сервера
