@@ -35,20 +35,12 @@ def data_entry():
 
 @app.route('/control')
 def control():
-    return render_template('control.html', title='')
+    return render_template('control.html')
 
 
 @app.route('/charts')
 def charts():
-    forma = Recharging()
-    if forma.recharging():
-        for i in range(1, 8):
-            for datas in db.get_values(i):
-                if i % 2 == 0:
-                    mc.make_chart_for_humidification(datas['val'], datas['n_time'])
-                else:
-                    mc.make_chart_for_temperature(datas['val'], datas['n_time'])
-    return render_template('charts.html', form=forma, title='Графики')
+    return render_template('charts.html', title='Графики')
 
 
 if __name__ == '__main__':  # условие запуска локального сервера

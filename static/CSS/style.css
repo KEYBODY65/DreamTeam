@@ -88,22 +88,17 @@ a:hover{
   margin-top:20px;
 }
 .bottom_footer {
-    background-color: #0f264b;
     color: #ffff;
     position: static;
     width: 100%;
-    height: 199px;
+    height: 0px;
     z-index: 1;
 }
-
-.wave_footer img {
-    overflow: hide;
-    bottom: 11%;
-    width: 100%;
-    position: absolute;
+footer {
+    background-color: blue;
 }
+
 footer h2, h4 {
-    position: absolute;
     font-family: sans-serif;
 }
 .button_place {
