@@ -50,10 +50,10 @@ a:hover{
 .base_body {
     position: absolute;
     border-radius: 10px;
-    bottom: 19%;
+    bottom: 22%;
     left: 25%;
     width: 70%;
-    height: 80%;
+    height: 77%;
     text-align: center;
     background-color: #e1fcf2;
 }
@@ -95,11 +95,16 @@ a:hover{
     color: #ffff;
     position: static;
     width: 100%;
-    height: 100px;
+    height: 180px;
 }
 
-footer h2, h4 {
-    font-family: sans-serif;
+footer h2 {
+    text-align: center;
+}
+footer p {
+    position: absolute;
+    bottom: 0%;
+    left: 90%;
 }
 .button_place {
   position: absolute;
@@ -116,5 +121,14 @@ footer h2, h4 {
     font-size:18px;
     box-shadow:4px 4px 15px rgba(0, 0.6, 0.6, 0.6);
 }
-
-
+hr {
+    width: 85%;
+    box-shadow: 3px 4px 3px black;
+}
+.footer li {
+    display: inline;
+    margin-bottom: 3px;
+}
+.footer a{
+    color: white;
+}

@@ -54,7 +54,7 @@ def charts():
             else:
                 datas_t.append(elem['val'])
 
-    return render_template('charts.html', title='Графики')
+    return render_template('charts.html', title='Графики', labels='times', values='datas_t')
 
 
 if __name__ == '__main__':  # условие запуска локального сервера
