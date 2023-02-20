@@ -29,7 +29,3 @@ class Control(FlaskForm):
     watringa6_off = SubmitField('Выключить полив (Бороздка №1)')
     watringa_on_all = SubmitField('Включить полив всех бороздок')
     watringa_off_all = SubmitField('Выключить полив всех бороздок')
-
-
-class Recharging(FlaskForm):
-    recharging = SubmitField("Обновить")
