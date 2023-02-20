@@ -1,11 +1,9 @@
 from flask import Flask, render_template, request
 from requests import get
 from db.db_ap import Database_API
-from data_entry import DataEntry, Recharging, Control
-from charts import makes_charts
+from data_entry import DataEntry, Control
 
 db = Database_API('./db/database.db')
-mc = makes_charts()
 app = Flask(__name__)  # создаём объект класса Flask
 app.config["SECRET_KEY"] = "secret_key"
 for i in range(1, 5):
@@ -40,6 +38,22 @@ def control():
 
 @app.route('/charts')
 def charts():
+    times = []
+    datas_t = []
+    datas_h = []
+    if '00:00:00' in times:
+        times.clear()
+        datas_t.clear()
+        datas_h.clear()
+    for i in range(1, 8):
+        conter = db.get_values(i)
+        for elem in conter:
+            times.append(elem['n_time'])
+            if i % 2 == 0:
+                datas_h.append(elem['val'])
+            else:
+                datas_t.append(elem['val'])
+
     return render_template('charts.html', title='Графики')
 
 
