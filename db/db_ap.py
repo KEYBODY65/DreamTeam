@@ -20,7 +20,7 @@ class Database_API:
         self.connect(
             'CREATE TABLE IF NOT EXISTS sensor_id (name TEXT, id int, CONSTRAINT sensor_id_pk PRIMARY KEY (id));')
         self.connect(
-            'CREATE TABLE IF NOT EXISTS sensor_values (id_sensor int, id int, val real, n_time time, CONSTRAINT'
+            'CREATE TABLE IF NOT EXISTS sensor_values (id_sensor int, id int, temperature real, hum real, hum_ground real, n_time time, CONSTRAINT'
             ' sensor_values_pk PRIMARY KEY (id), CONSTRAINT sensor_id_fk FOREIGN KEY (id_sensor) REFERENCES sensor_id(id));')
         self.connect('INSERT INTO sensor_id (name, id) VALUES(\'humidification_sensor1\', 0);')
         self.connect('INSERT INTO sensor_id (name, id) VALUES(\'tem_sensor1\', 1);')
@@ -33,12 +33,13 @@ class Database_API:
         self.connect('INSERT INTO sensor_id (name, id) VALUES(\'auto_door\', 8);')
         self.connect('INSERT INTO sensor_id (name, id) VALUES(\'watringa\', 9);')
 
-    def create_recort(self, id_sensor: int, values: float):
+    def create_recort(self, id_sensor: int, temperature: float, hum: float, hum_ground: float):
         last_id = self.connect('SELECT id+1 FROM sensor_values ORDER BY id DESC LIMIT 1;', fetchall=True)
         last_id = 0 if last_id == [] else last_id[0][0]
         self.connect(
-            'INSERT INTO sensor_values (id_sensor, id, val, n_time) VALUES(?, ?, ?, TIME(\"now\", \"+3 hours\"));',
-            params=(id_sensor, last_id, values,))
+            'INSERT INTO sensor_values (id_sensor, id, temperature, hum, hum_ground, n_time) VALUES(?, ?, ?, ?, ?, TIME(\"now\", \"+3 hours\"));',
+
+            params=(id_sensor, last_id, temperature, hum, hum_ground))
 
     def get_values(self, id_sensor):
         data = self.connect("SELECT * FROM sensor_values WHERE id_sensor=?", params=(id_sensor,), off=False,
@@ -47,9 +48,11 @@ class Database_API:
         return data
 
 
+#
 # d = Database_API('database.db')
-# d.create_tables()
-# print(*d.get_values(7), sep='\n')
+# # d.create_tables()
+# for i in range(1, 6):
+#     print(d.get_values(i))
 # d.connect("SELECT * FROM sensor_values", off=False, fetchall=True)
 # d.create_recort(1, 27.3)
 # d.create_tables()

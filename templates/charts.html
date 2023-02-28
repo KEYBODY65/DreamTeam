@@ -8,13 +8,13 @@
 
 <script>
   let ctx = document.getElementById('myChart').getContext('2d');
-  let myChart(ctx, {
+  const myChart(ctx, {
     type: 'line',
     data: {
-      labels: ['one', 'two', 'three', 'four'],
+      labels: label,
       datasets: [{
         label: '#теплицы',
-        data: [10, 70, 45, 30],
+        data: values,
         borderWidth: 1,
         borderColor: [
           'rgba(255,99,132,1)',
