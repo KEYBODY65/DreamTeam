@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block dataentry_block %}
+<div class="registration-cssave">
+            <h3 class="text-center"> Указать пределы температуры и влажности</h3>
+            <form method="post">
+                <div class="form-group">
+                    <input class="form-control item" type="number" name="temp in tepl" minlength="6" id="<Температура в теплице" placeholder="Температура в теплице:" required>
+                </div>
+                <div class="form-group">
+                    <input class="form-control item" type="number" name="humidification in tepl" minlength="6" id="H" placeholder="Влажность в теплице" required>
+                </div>
+                <div class="form-group">
+                    <input class="form-control item" type="number" name="humidification in tepl" minlength="6" id="H" placeholder="Влажность почвы в теплице" required>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-primary btn-block create-account" type="submit"> Указать </button>
+                </div>
+            </form>
+</div>
+{% endblock %}

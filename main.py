@@ -8,7 +8,9 @@ app = Flask(__name__)  # создаём объект класса Flask
 app.config["SECRET_KEY"] = "secret_key"
 for i in range(1, 5):
     data = get(f"https://dt.miet.ru/ppo_it/api/temp_hum/{i}").json()  # кидаем Гет запрос
-    db.create_recort(id_sensor=(i - 1) * 2, temperature=data['temperature'], hum=data["humidity"], hum_ground=data['humidity'])
+    db.create_recort(id_sensor=(i - 1) * 2, temperature=data['temperature'], hum=data["humidity"],
+                     hum_ground=data['humidity'])
+
 
 @app.route('/')  # Отслеживание(переход) на главную страницу
 @app.route('/home')
@@ -25,7 +27,8 @@ def data_entry():
         humidification = request.form.get("humidification")
         groundhumidification = request.form.get("groundhumidification")
         if idi and temperature and humidification and groundhumidification:
-            db.create_recort(id_sensor=int(idi), temperature=int(temperature), hum=float(humidification), hum_ground=float(groundhumidification))
+            db.create_recort(id_sensor=int(idi), temperature=int(temperature), hum=float(humidification),
+                             hum_ground=float(groundhumidification))
     return render_template('dataentry.html', title='Ручное внесение данных', form=form)
 
 
@@ -49,6 +52,11 @@ def charts():
             datas_gh.append(elem['hum_ground'])
 
     return render_template('charts.html', title='Графики', label=times, values=datas_t, values2=datas_h)
+
+
+@app.route('/lim')
+def limit():
+    return render_template('lim.html')
 
 
 def validate():
