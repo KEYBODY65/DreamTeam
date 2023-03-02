@@ -1,7 +1,8 @@
 from flask import Flask, render_template, request
 from requests import get, patch
 from db.db_ap import Database_API
-from data_entry import DataEntry, Control
+from statistics import mean
+from data_entry import DataEntry, Control, Entry_Lims
 
 db = Database_API('./db/database.db')
 app = Flask(__name__)  # создаём объект класса Flask
@@ -37,30 +38,49 @@ def charts():
     times = []
     datas_t = []
     datas_h = []
-    datas_gh = []
     data_hground = []
     if '00:00:00' in times:
         times.clear()
         datas_t.clear()
         datas_h.clear()
         data_hground.clear()
-    for i in range(1, 8):
-        conter = db.get_values(i)
+    for j in range(1, 8):
+        conter = db.get_values(j)
         for elem in conter:
             times.append(elem['n_time'])
             datas_h.append(elem['temperature'])
-            datas_gh.append(elem['hum_ground'])
+            data_hground.append(elem['hum_ground'])
 
-    return render_template('charts.html', title='Графики', label=times, values=datas_t, values2=datas_h)
+    def validate():
+        form = Entry_Lims()
+        if form.Submit_button():
+            t = request.form.get('T')
+            h = request.form.get('H')
+            h_and_g = request.form.get('Hb%')
+            flag1 = False
+            flag2 = False
+            flag3 = False
+            if t >= mean(datas_t):
+                flag1 = True
+            elif h >= mean(datas_h):
+                flag2 = True
+            elif h_and_g >= mean(data_hground):
+                flag3 = True
+            else:
+                flag1 = False
+                flag2 = False
+                flag3 = False
+            return flag1, flag2, flag3
+
+    t_flag, h_flag, hground_flag = validate()
+
+    return render_template('charts.html', title='Графики', label=times, values=datas_t, values2=datas_h,
+                           t_flag=t_flag, h_flag=h_flag, hground_flag=hground_flag)
 
 
 @app.route('/lim')
 def limit():
-    return render_template('lim.html')
-
-
-def validate():
-    pass
+    return render_template('lim.html', title='Указать пределы температуры и влажности')
 
 
 @app.route('/control', methods=['GET', 'POST'])

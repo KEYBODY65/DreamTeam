@@ -1,31 +1,63 @@
 {% extends 'base.html' %}
 {% block control_block %}
 <div class = 'button_place'>
-    <div class="form-group">
+        <div class="form-group">
+            {% if t_flag %}
             <button class="button" type="submit">Открыть дверь</button>
+            {% else %}
+            <button disabled class="button_disabled" type="submit">Открыть дверь</button>
+            {% endif %}
         </div>
     <div class="form-group">
+            {% if t_flag %}
             <button class="button" type="submit">Закрыть дверь</button>
+            {% else %}
+            <button disabled class="button_disabled" type="submit">Закрыть дверь</button>
+            {% endif %}
         </div>
     <div class="form-group">
+            {% if h_flag %}
             <button class="button" type="submit">Включить увлажнение</button>
+            {% else %}
+            <button disabled class="button_disabled" type="submit">Включить увлажнение</button>
+            {% endif %}
         </div>
     <div class="form-group">
+            {% if h_flag %}
             <button class="button" type="submit">Выключить увлажнение</button>
+            {% else %}
+            <button disabled class="button_disabled" type="submit">Выключить увлажнение</button>
+            {% endif %}
         </div>
     <div class="form-group">
+            {% if hground_flag %}
             <input class="form-control item" type="number" name="idi_of_wtringa" minlength="1" id="idi_of_wtringa" placeholder="Номер бороздки" required>
-        </div>
             <button class="button" type="submit">Включить полив бороздки</button>
+            {% else %}
+            <input disabled class="form-control item" type="number" name="idi_of_wtringa" minlength="1" id="idi_of_wtringa" placeholder="Номер бороздки" required>
+            <button disabled class="button_disabled" type="submit">Включить полив бороздки</button>
+            {% endif %}
         </div>
     <div class="form-group">
+            {% if hground_flag %}
             <button class="button" type="submit">Выключить полив</button>
+            {% else %}
+            <button disabled class="button_disabled" type="submit">Выключить полив</button>
+            {% endif %}
         </div>
     <div class="form-group">
+            {% if hground_flag %}
             <button class="button" type="submit">Включить полив всех бороздок</button>
+            {% else %}
+
+            {% endif %}
         </div>
     <div class="form-group">
+            {% if hground_flag %}
             <button class="button" type="submit">Выключить полив всех бороздок</button>
+            {% else %}
+
+            {% endif %}
         </div>
 </div>
 {% endblock %}
