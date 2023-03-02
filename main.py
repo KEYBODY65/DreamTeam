@@ -60,11 +60,11 @@ def charts():
             flag1 = False
             flag2 = False
             flag3 = False
-            if t >= mean(datas_t):
+            if t  <= mean(datas_t):
                 flag1 = True
-            elif h >= mean(datas_h):
+            elif h <= mean(datas_h):
                 flag2 = True
-            elif h_and_g >= mean(data_hground):
+            elif h_and_g <= mean(data_hground):
                 flag3 = True
             else:
                 flag1 = False
