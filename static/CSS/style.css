@@ -41,19 +41,18 @@ li {
 
 a {
   text-decoration: none;
-  color: #000000;
+  color: #ffff;
 }
-a:hover{
-  border-radius: 10px black;
-  height: 15px;
-}
+.a-btn:focus{
+     transform: scale(1.2);
+ }
 .base_body {
     position: absolute;
     border-radius: 10px;
-    bottom: 22%;
+    bottom: 12%;
     left: 25%;
     width: 70%;
-    height: 77%;
+    height: 81%;
     text-align: center;
     background-color: #e1fcf2;
 }
@@ -62,8 +61,8 @@ a:hover{
     position: relative;
     left: 300px;
     width: 200px;
-    height: 450px;
-    margin-top: -10px;
+    height: 400px;
+    margin-top: 5%;
     padding:50px 70px;
     border-radius: 10px;
     box-shadow:4px 4px 15px rgba(0, 0, 0, 0.2);
@@ -104,8 +103,8 @@ footer h2 {
     text-align: center;
 }
 footer p {
-    position: absolute;
-    bottom: 0%;
+    position: relative;
+    bottom: 19%;
     left: 90%;
 }
 .button_place {
@@ -118,16 +117,9 @@ footer p {
 }
 .button {
     background-color:#001752;
+    margin: 4em;
     color: white;
     font-weight: bold;
-    border-radius: 10px;
-    font-size:18px;
-    box-shadow:4px 4px 15px rgba(0, 0.6, 0.6, 0.6);
-}
-.button_disabled {
-    background-color:#444444;
-    color: white;
-    font-weight:bold;
     border-radius: 10px;
     font-size:18px;
     box-shadow:4px 4px 15px rgba(0, 0.6, 0.6, 0.6);
