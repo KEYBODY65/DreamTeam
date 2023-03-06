@@ -1,34 +1,46 @@
 {% extends 'base.html' %}
 {% block charts_block %}
+<input  type="button" onclick="table([0, 20, 20, 60, 60])" value="Click">
 <div>
-  <canvas id="myChart"></canvas>
-</div>
+        <canvas id="myChart"></canvas>
+      </div>
+
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
 <script>
-  let ctx = document.getElementById('myChart').getContext('2d');
-  const myChart(ctx, {
-    type: 'line',
-    data: {
-      labels: label,
-      datasets: [{
-        label: '#теплицы',
-        data: values,
-        borderWidth: 1,
-        borderColor: [
-          'rgba(255,99,132,1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(75, 192, 192, 1)',
-          'rgba(153, 102, 255, 1)',
-          'rgba(255, 159, 64, 1)'
-        ],
-      }]
-    },
-    options: {}
-  });
-</script>
-{% endblock %}
+    const data_count = 25;
+    const labels = [];
+    for (let i = 0; i < data_count; ++i) {
+    labels.push(i.toString());
+    }
+
+    function table(data, data1, data2){
+        const ctx = document.getElementById('myChart').getContext('2d');
+        let myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Влажность теплицы',
+                data: data
+            },{
+              label: 'Температура теплицы',
+               data: data1
+            },{
+              label: 'Влажность почвы',
+              data: data2
+            }]
+        },
+        options: {
+            plugins: {
+            title: {
+                display: true,
+                text: 'График изменения данных'
+            },
+            }
+        }
+        });
+    }
+</script>{% endblock %}
 
 

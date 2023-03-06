@@ -30,22 +30,23 @@ html, body {
   font-weight: bold;
 }
 .nav {
-  margin-left: 15px;
   margin-top: 0;
 }
 li {
   margin-bottom: 4em;
   font-size: 26px;
   display: block;
+  width: 90%;
 }
 
 a {
   text-decoration: none;
   color: #ffff;
 }
-.a-btn:focus{
+.a-btn:active{
      transform: scale(1.2);
  }
+
 .base_body {
     position: absolute;
     border-radius: 10px;

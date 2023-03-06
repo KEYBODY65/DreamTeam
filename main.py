@@ -50,8 +50,9 @@ def charts():
             times.append(elem['n_time'])
             datas_h.append(elem['temperature'])
             data_hground.append(elem['hum_ground'])
+    return render_template('charts.html', title='Графики')
 
-    def validate():
+'''    def validate():
         form = Entry_Lims()
         if form.Submit_button():
             t = request.form.get('T')
@@ -75,7 +76,7 @@ def charts():
     t_flag, h_flag, hground_flag = validate()
 
     return render_template('charts.html', title='Графики', label=times, values=datas_t, values2=datas_h,
-                           t_flag=t_flag, h_flag=h_flag, hground_flag=hground_flag)
+                           t_flag=t_flag, h_flag=h_flag, hground_flag=hground_flag)'''
 
 
 @app.route('/lim')
