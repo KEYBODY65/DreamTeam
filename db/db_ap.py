@@ -47,12 +47,9 @@ class Database_API:
 
         return data
 
-
-#
 # d = Database_API('database.db')
-# d.create_tables()
+# # # d.create_tables()
 # for i in range(1, 6):
 #     print(d.get_values(i))
 # d.connect("SELECT * FROM sensor_values", off=False, fetchall=True)
 # d.create_recort(1, 27.3)
-# d.create_tables()

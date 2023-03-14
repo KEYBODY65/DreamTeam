@@ -22,7 +22,7 @@ html, body {
 .menu {
   background-image: url('../pictures/tropic.gif');
   width: 20%;
-  height: 600px;
+  height: 630px;
   border-radius: 7px;
   position: relative;
   margin: 0;
@@ -50,10 +50,10 @@ a {
 .base_body {
     position: absolute;
     border-radius: 10px;
-    bottom: 12%;
+    bottom: 24%;
     left: 25%;
     width: 70%;
-    height: 81%;
+    height: 75%;
     text-align: center;
     background-color: #e1fcf2;
 }

@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block table_block %}
+<table border="1px solid black">
+    <thead>
+        <tr>
+            <th width=50px></th>
+            <th>
+                Датчик влажности
+            </th>
+            <th>
+                Датчик температуры
+            </th>
+            <th>
+                Датчик влажности почвы
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for i in range(len(values)) %}
+            <form method="post">
+                <tr>
+                    <th>
+                        <h2 >{{ label[i] }}</h2>
+                    </th>
+                    <th>
+                        {{ values[i] }}
+                    </th>
+                    <th>
+                        {{ values2[i] }}
+                    </th>
+                    <th>
+                        {{ values3[i] }}
+                    </th>
+                </tr>
+            </form>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

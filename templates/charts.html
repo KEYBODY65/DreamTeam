@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block charts_block %}
-<input  type="button" onclick="table([0, 20, 20, 60, 60])" value="Click">
+<input  type="button" onclick="table{{values, values2, values3}}" value="Click">
 <div>
         <canvas id="myChart"></canvas>
       </div>
@@ -41,6 +41,7 @@
         }
         });
     }
-</script>{% endblock %}
+</script>
+{% endblock %}
 
 
