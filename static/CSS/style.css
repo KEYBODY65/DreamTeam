@@ -50,10 +50,10 @@ a {
 .base_body {
     position: absolute;
     border-radius: 10px;
-    bottom: 24%;
+    top: 2%;
     left: 25%;
     width: 70%;
-    height: 75%;
+    height: 670px;
     text-align: center;
     background-color: #e1fcf2;
 }
@@ -106,7 +106,7 @@ footer h2 {
 footer p {
     position: relative;
     bottom: 19%;
-    left: 90%;
+    margin-left: 90%;
 }
 .button_place {
   position: relative;
@@ -135,4 +135,12 @@ hr {
 }
 .footer a{
     color: white;
+}
+.a-table{
+    color: black;
+    font-size:19px;
+}
+.chart{
+    color: black;
+    font-size:19px;
 }

@@ -16,11 +16,11 @@
         </tr>
     </thead>
     <tbody>
-    {% for i in range(len(values)) %}
+    {% for i in range(lenth) %}
             <form method="post">
                 <tr>
                     <th>
-                        <h2 >{{ label[i] }}</h2>
+                        <h2 > {{ label[i] }} </h2>
                     </th>
                     <th>
                         {{ values[i] }}
@@ -33,7 +33,7 @@
                     </th>
                 </tr>
             </form>
-        {% endfor %}
+    {% endfor %}
     </tbody>
 </table>
 {% endblock %}

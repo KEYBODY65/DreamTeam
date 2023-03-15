@@ -34,6 +34,8 @@ def values():
 
 
 values()
+lenth = len(datas_t)
+print(lenth)
 
 
 @app.route('/')  # Отслеживание(переход) на главную страницу
@@ -61,6 +63,7 @@ def data_entry():
 def charts():
     return render_template('charts.html', title='Графики', label=times, values=datas_t, values2=datas_h,
                            values3=data_hground)
+
 
 
 @app.route('/lim', methods=['GET', 'POST'])
@@ -128,6 +131,11 @@ def control():
 
     validate()
     return render_template('control.html', form=formas, flag_t=flag_t, flag_h=flag_h, flag_dh=flag_dh)
+
+
+@app.route('/tables')
+def tables():
+    return render_template('tables.html', title='Таблица')
 
 
 if __name__ == '__main__':  # условие запуска локального сервера
