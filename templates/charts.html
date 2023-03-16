@@ -12,11 +12,12 @@
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-    const data_count = 25;
-    const labels = [];
+    const data_count = {{ lenth }};
+    const label = [];
     for (let i = 0; i < data_count; ++i) {
-    labels.push(i.toString());
+    label.push(i.toString());
     }
+    labels = label.slice(-50)
 
     function table(data, data1, data2){
         const ctx = document.getElementById('myChart').getContext('2d');
@@ -25,14 +26,14 @@
         data: {
             labels: labels,
             datasets: [{
-                label: 'Влажность теплицы',
-                data: data
+                label: 'Температура теплицы',
+                data: data.slice(-50)
             },{
-              label: 'Температура теплицы',
-               data: data1
+              label: 'Влажность теплицы',
+               data: data1.slice(-50)
             },{
               label: 'Влажность почвы',
-              data: data2
+              data: data2.slice(-50)
             }]
         },
         options: {
