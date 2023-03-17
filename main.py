@@ -115,9 +115,11 @@ def data_entry():
 def charts():
     d_t_1, d_t_2, d_t_3, d_t_4, d_t_5, d_t_6, d_t_7, d_h_1, d_h_2, d_h_3, d_h_3, d_h_4, d_h_5, d_h_6, \
     d_h_7, d_hg_1, d_hg_2, d_hg_3, d_hg_4, d_hg_5, d_hg_6, d_hg_7 = values()
-    return render_template('charts.html', title='Графики', temp=d_t_1, temp=d_t_2,
-                           temp=d_t_3, temp=d_t_4, temp=d_t_5, temp=d_t_6, temp=d_t_7, hum1=d_h_1, hum2=d_h_2, hum3=d_h_3, hum4=d_h_4, hum=d_h_5, hum=d_h_6, hum=d_h_7,
-                           hum_ground1= d_hg_1, hum_ground2= d_hg_2, hum_ground3= d_hg_3, hum_ground4= d_hg_4, hum_ground5= d_hg_5, hum_ground6= d_hg_6, hum_ground7= d_hg_7, lenth=25)
+    return render_template('charts.html', title='Графики', temp1=d_t_1, temp2=d_t_2,
+                           temp3=d_t_3, temp4=d_t_4, temp5=d_t_5, temp6=d_t_6, temp7=d_t_7, hum1=d_h_1, hum2=d_h_2,
+                           hum3=d_h_3, hum4=d_h_4, hum=d_h_5, hum6=d_h_6, hum7=d_h_7,
+                           hum_ground1=d_hg_1, hum_ground2=d_hg_2, hum_ground3=d_hg_3, hum_ground4=d_hg_4,
+                           hum_ground5=d_hg_5, hum_ground6=d_hg_6, hum_ground7=d_hg_7, lenth=25)
 
 
 @app.route('/lim', methods=['GET', 'POST'])
@@ -187,9 +189,11 @@ def control():
 def tables():
     d_t_1, d_t_2, d_t_3, d_t_4, d_t_5, d_t_6, d_t_7, d_h_1, d_h_2, d_h_3, d_h_3, d_h_4, d_h_5, d_h_6, \
     d_h_7, d_hg_1, d_hg_2, d_hg_3, d_hg_4, d_hg_5, d_hg_6, d_hg_7 = values()
-    return render_template('tables.html', title='Таблица', lenth=25, temp=d_t_1, temp=d_t_2,
-                           temp=d_t_3, temp=d_t_4, temp=d_t_5, temp=d_t_6, temp=d_t_7, hum1=d_h_1, hum2=d_h_2, hum3=d_h_3, hum4=d_h_4, hum=d_h_5, hum=d_h_6, hum=d_h_7,
-                           hum_ground1= d_hg_1, hum_ground2= d_hg_2, hum_ground3= d_hg_3, hum_ground4= d_hg_4, hum_ground5= d_hg_5, hum_ground6= d_hg_6, hum_ground7= d_hg_7)
+    return render_template('tables.html', title='Таблица', lenth=25, temp1=d_t_1, temp2=d_t_2,
+                           temp3=d_t_3, temp4=d_t_4, temp5=d_t_5, temp6=d_t_6, temp7=d_t_7, hum1=d_h_1, hum2=d_h_2,
+                           hum3=d_h_3, hum4=d_h_4, hum=d_h_5, hum6=d_h_6, hum7=d_h_7,
+                           hum_ground1=d_hg_1, hum_ground2=d_hg_2, hum_ground3=d_hg_3, hum_ground4=d_hg_4,
+                           hum_ground5=d_hg_5, hum_ground6=d_hg_6, hum_ground7=d_hg_7)
 
 
 if __name__ == '__main__':  # условие запуска локального сервера
