@@ -48,7 +48,6 @@ def data_entry():
         temperature = form.temperature.data
         humidification = form.humidification.data
         groundhumidification = form.humidificationground.data
-        print(idi, temperature, humidification, groundhumidification)
         if idi and temperature and humidification and groundhumidification:
             db.create_recort(id_sensor=int(idi), temperature=int(temperature), hum=float(humidification),
                              hum_ground=float(groundhumidification))
