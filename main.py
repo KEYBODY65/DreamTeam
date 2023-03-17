@@ -14,6 +14,7 @@ def values():
         data = get(f"https://dt.miet.ru/ppo_it/api/temp_hum/{i}").json()  # кидаем Гет запрос
         db.create_recort(id_sensor=(i - 1) * 2, temperature=data['temperature'], hum=data["humidity"],
                          hum_ground=data['humidity'])
+    times = []
     d_t_1, d_t_2, d_t_3, d_t_4, d_t_5, d_t_6, d_t_7 = [], [], [], [], [], [], []
     d_h_1, d_h_2, d_h_3, d_h_4, d_h_5, d_h_6, d_h_7 = [], [], [], [], [], [], []
     d_hg_1, d_hg_2, d_hg_3, d_hg_4, d_hg_5, d_hg_6, d_hg_7 = [], [], [], [], [], [], []
@@ -42,6 +43,7 @@ def values():
     for j in range(1, 8):
         conter = db.get_values(j)
         for elem in conter:
+            times.append(elem['n_time'])
             if elem['id_sensor'] == 1:
                 d_t_1.append(elem['temperature'])
                 d_h_1.append(elem['hum'])
@@ -72,7 +74,7 @@ def values():
                 d_hg_7.append(elem['hum_ground'])
 
     return d_t_1, d_t_2, d_t_3, d_t_4, d_t_5, d_t_6, d_t_7, d_h_1, d_h_2, d_h_3, d_h_3, d_h_4, d_h_5, d_h_6, \
-           d_h_7, d_hg_1, d_hg_2, d_hg_3, d_hg_4, d_hg_5, d_hg_6, d_hg_7
+           d_h_7, d_hg_1, d_hg_2, d_hg_3, d_hg_4, d_hg_5, d_hg_6, d_hg_7, times
 
 
 def val_lim():
@@ -93,7 +95,7 @@ def val_lim():
 @app.route('/home')
 def main():
     d_t_1, d_t_2, d_t_3, d_t_4, d_t_5, d_t_6, d_t_7, d_h_1, d_h_2, d_h_3, d_h_3, d_h_4, d_h_5, d_h_6, \
-    d_h_7, d_hg_1, d_hg_2, d_hg_3, d_hg_4, d_hg_5, d_hg_6, d_hg_7 = values()
+    d_h_7, d_hg_1, d_hg_2, d_hg_3, d_hg_4, d_hg_5, d_hg_6, d_hg_7, times = values()
     return render_template('index.html', title='Главная страница')
 
 
@@ -114,8 +116,8 @@ def data_entry():
 @app.route('/charts', methods=['GET', 'POST'])
 def charts():
     d_t_1, d_t_2, d_t_3, d_t_4, d_t_5, d_t_6, d_t_7, d_h_1, d_h_2, d_h_3, d_h_3, d_h_4, d_h_5, d_h_6, \
-    d_h_7, d_hg_1, d_hg_2, d_hg_3, d_hg_4, d_hg_5, d_hg_6, d_hg_7 = values()
-    return render_template('charts.html', title='Графики', temp1=d_t_1, temp2=d_t_2,
+    d_h_7, d_hg_1, d_hg_2, d_hg_3, d_hg_4, d_hg_5, d_hg_6, d_hg_7, times = values()
+    return render_template('charts.html', title='Графики', times=times, temp1=d_t_1, temp2=d_t_2,
                            temp3=d_t_3, temp4=d_t_4, temp5=d_t_5, temp6=d_t_6, temp7=d_t_7, hum1=d_h_1, hum2=d_h_2,
                            hum3=d_h_3, hum4=d_h_4, hum=d_h_5, hum6=d_h_6, hum7=d_h_7,
                            hum_ground1=d_hg_1, hum_ground2=d_hg_2, hum_ground3=d_hg_3, hum_ground4=d_hg_4,
@@ -188,8 +190,8 @@ def control():
 @app.route('/tables')
 def tables():
     d_t_1, d_t_2, d_t_3, d_t_4, d_t_5, d_t_6, d_t_7, d_h_1, d_h_2, d_h_3, d_h_3, d_h_4, d_h_5, d_h_6, \
-    d_h_7, d_hg_1, d_hg_2, d_hg_3, d_hg_4, d_hg_5, d_hg_6, d_hg_7 = values()
-    return render_template('tables.html', title='Таблица', lenth=25, temp1=d_t_1, temp2=d_t_2,
+    d_h_7, d_hg_1, d_hg_2, d_hg_3, d_hg_4, d_hg_5, d_hg_6, d_hg_7, times = values()
+    return render_template('tables.html', title='Таблица', lenth=25, times=times, temp1=d_t_1, temp2=d_t_2,
                            temp3=d_t_3, temp4=d_t_4, temp5=d_t_5, temp6=d_t_6, temp7=d_t_7, hum1=d_h_1, hum2=d_h_2,
                            hum3=d_h_3, hum4=d_h_4, hum=d_h_5, hum6=d_h_6, hum7=d_h_7,
                            hum_ground1=d_hg_1, hum_ground2=d_hg_2, hum_ground3=d_hg_3, hum_ground4=d_hg_4,
