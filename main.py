@@ -2,7 +2,7 @@ from flask import Flask, render_template, request
 from requests import get, patch
 from db.db_ap import Database_API
 from statistics import mean
-from data_entry import DataEntry, Control, Entry_Lims, Extra_Control
+from data_entry import DataEntry, Control, Entry_Lims
 
 db = Database_API('./db/database.db')
 app = Flask(__name__)  # создаём объект класса Flask
@@ -71,7 +71,6 @@ def limit():
         h_and_g = form.Hb.data
         with open('limits', 'w', encoding='UTF-8') as file_lims:
             file_lims.seek(0)
-            print(t, h, h_and_g)
             file_lims.write(str(t) + " " + str(h) + " " + str(h_and_g))
 
     return render_template('lim.html', title='Указать пределы температуры и влажности')
@@ -80,25 +79,25 @@ def limit():
 @app.route('/control', methods=['GET', 'POST'])
 def control():
     formas = Control()
-    if Control.door_open:
+    if formas.door_open:
         patch('https://dt.miet.ru/ppo_it/api/fork_drive/ https://dt.miet.ru/ppo_it/api/fork_drive/',
               params={"state": 1})
-        if Control.door_close:
+        if formas.door_close:
             patch('https://dt.miet.ru/ppo_it/api/fork_drive/ https://dt.miet.ru/po_it/api/fork_drive/',
                   params={"state": 0})
-    elif Control.hum_on:
+    elif formas.hum_on:
         patch('https://dt.miet.ru/ppo_it/api/total_hum', params={"state": 1})
-        if Control.hum_off:
+        if formas.hum_off:
             patch('https://dt.miet.ru/ppo_it/api/total_hum', params={"state": 0})
-    elif Control.idi_of_wtringa != 0 and Control.watringa_on:
-        number = Control.idi_of_wtringa
+    elif formas.idi_of_wtringa != 0 and formas.watringa_on:
+        number = formas.idi_of_wtringa
         patch('https://dt.miet.ru/ppo_it/api/total_hum', params={'id': number, 'state': 1})
-        if Control.watringa_off:
+        if formas.watringa_off:
             patch('https://dt.miet.ru/ppo_it/api/total_hum', params={'id': number, 'state': 0})
-    elif Control.watringa_all_on:
+    elif formas.watringa_all_on:
         for v in range(1, 7):
             patch('https://dt.miet.ru/ppo_it/api/watering', params={'id': v, 'state': 1})
-        if Control.watringa_all_off:
+        if formas.watringa_all_off:
             for j in range(1, 7):
                 patch('https://dt.miet.ru/ppo_it/api/watering', params={'id': j, 'state': 0})
     flag_t = True
@@ -112,20 +111,16 @@ def control():
         with open('limits', 'r', encoding='UTF-8') as file_lims:
             values_lims = list(map(int, file_lims.readlines()[0].split()))
             if mean(datas_t) < int(values_lims[0]):
-                flag_t = False
-                flag_h = True
-                flag_dh = True
+                flag_t, flag_h, flag_dh = False, True, True
             elif mean(datas_h) > int(values_lims[1]):
-                flag_h = False
-                flag_t = True
-                flag_dh = True
+                flag_h, flag_t, flag_dh = False, True, True
             elif mean(data_hground) > int(values_lims[-1]):
-                flag_dh = False
-                flag_h = True
-                flag_t = True
+                flag_dh, flag_h, flag_h = False, True, True
         return flag_t, flag_h, flag_dh
 
     validate()
+    if Control.extra_control:
+        flag_t, flag_h, flag_dh = True, True, True
     return render_template('control.html', form=formas, flag_t=flag_t, flag_h=flag_h, flag_dh=flag_dh)
 
 
@@ -135,23 +130,6 @@ def tables():
     return render_template('tables.html', title='Таблица', lenth=len(datas_t), label=times, values=datas_t,
                            values2=datas_h,
                            values3=data_hground)
-
-
-
-@app.route('/extra', methods=['GET', 'POST'])
-def etra_control():
-    f = Extra_Control()
-    if Extra_Control.d_open:
-        patch('https://dt.miet.ru/ppo_it/api/fork_drive/ https://dt.miet.ru/ppo_it/api/fork_drive/',
-              params={"state": 1})
-        if Extra_Control.d_close:
-            patch('https://dt.miet.ru/ppo_it/api/fork_drive/ https://dt.miet.ru/po_it/api/fork_drive/',
-                  params={"state": 0})
-    elif Control.hum_on:
-        patch('https://dt.miet.ru/ppo_it/api/total_hum', params={"state": 1})
-        if Control.hum_off:
-            patch('https://dt.miet.ru/ppo_it/api/total_hum', params={"state": 0})
-
 
 
 if __name__ == '__main__':  # условие запуска локального сервера

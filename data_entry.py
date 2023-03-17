@@ -18,21 +18,9 @@ class Entry_Lims(FlaskForm):
     Submit_button = SubmitField("Указать")
 
 
-class Extra_Control(FlaskForm):
-    h_on = SubmitField('Увалжанить')
-    h_off = SubmitField('Прекратить увдажнение')
-    d_open = SubmitField('Открыть')
-    d_close = SubmitField('Заркыть')
-    wat_all_on = SubmitField('Полить все Бороздки')
-    wat_all_off = SubmitField('Выключить полив всех бороздок')
-    idi_of_wtr = StringField('Номер бороздки: ', validators=[Length(min=1)])
-    wat_on = SubmitField('Включить полив этой бороздки')
-    wat_off = SubmitField('Выключить полив этой бороздки')
-
-
 class Control(FlaskForm):
-    hum_on = SubmitField('Увалжанить')
-    hum_off = SubmitField('Прекратить увдажнение')
+    hum_on = SubmitField('Увлажнить')
+    hum_off = SubmitField('Прекратить увлажнение')
     door_open = SubmitField('Открыть')
     door_close = SubmitField('Заркыть')
     watringa_all_on = SubmitField('Полить все Бороздки')
@@ -40,3 +28,4 @@ class Control(FlaskForm):
     idi_of_wtringa = StringField('Номер бороздки: ', validators=[Length(min=1)])
     watringa_on = SubmitField('Включить полив этой бороздки')
     watringa_off = SubmitField('Выключить полив этой бороздки')
+    extra_control = SubmitField('ключить экстренное управление')
