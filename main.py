@@ -94,8 +94,7 @@ def data_entry():
 
 @app.route('/charts', methods=['GET', 'POST'])
 def charts():
-    d_t_1, d_t_2, d_t_3, d_t_4, d_t_5, d_t_6, d_t_7, d_h_1, d_h_2, d_h_3, d_h_3, d_h_4, d_h_5, d_h_6, \
-    d_h_7, d_hg_1, d_hg_2, d_hg_3, d_hg_4, d_hg_5, d_hg_6, d_hg_7, times = values()
+    d_t_1, d_t_2, d_t_3, d_t_4, d_h_1, d_h_2, d_h_3, d_h_3, d_h_4, d_hg_1, d_hg_2, d_hg_3, d_hg_4, times = values()
     return render_template('charts.html', title='Графики', times=times,
                            temp1=d_t_1, temp2=d_t_2, temp3=d_t_3, temp4=d_t_4,
                            hum1=d_h_1, hum2=d_h_2, hum3=d_h_3, hum4=d_h_4,
