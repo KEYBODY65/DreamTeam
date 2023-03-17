@@ -9,38 +9,91 @@ app = Flask(__name__)  # создаём объект класса Flask
 app.config["SECRET_KEY"] = "secret_key"
 
 
-
-
-
 def values():
     for i in range(1, 5):
         data = get(f"https://dt.miet.ru/ppo_it/api/temp_hum/{i}").json()  # кидаем Гет запрос
         db.create_recort(id_sensor=(i - 1) * 2, temperature=data['temperature'], hum=data["humidity"],
                          hum_ground=data['humidity'])
-    times = []
-    datas_t = []
-    datas_h = []
-    data_hground = []
-    if '00:00:00' in times:
-        times.clear()
-        datas_t.clear()
-        datas_h.clear()
-        data_hground.clear()
+    d_t_1, d_t_2, d_t_3, d_t_4, d_t_5, d_t_6, d_t_7 = [], [], [], [], [], [], []
+    d_h_1, d_h_2, d_h_3, d_h_4, d_h_5, d_h_6, d_h_7 = [], [], [], [], [], [], []
+    d_hg_1, d_hg_2, d_hg_3, d_hg_4, d_hg_5, d_hg_6, d_hg_7 = [], [], [], [], [], [], []
+    if len(d_t_1) == 25:
+        d_t_1.clear()
+        d_t_2.clear()
+        d_t_3.clear()
+        d_t_4.clear()
+        d_t_5.clear()
+        d_t_6.clear()
+        d_t_7.clear()
+        d_h_1.clear()
+        d_h_2.clear()
+        d_h_3.clear()
+        d_h_4.clear()
+        d_h_5.clear()
+        d_h_6.clear()
+        d_h_7.clear()
+        d_hg_1.clear()
+        d_hg_2.clear()
+        d_hg_3.clear()
+        d_hg_4.clear()
+        d_hg_5.clear()
+        d_hg_6.clear()
+        d_hg_7.clear()
     for j in range(1, 8):
         conter = db.get_values(j)
         for elem in conter:
-            print(elem)
-            times.append(elem['n_time'])
+            if elem['id_sensor'] == 1:
+                d_t_1.append(elem['temperature'])
+                d_h_1.append(elem['hum'])
+                d_hg_1.append(elem['hum_ground'])
+            elif elem['id_sensor'] == 2:
+                d_t_2.append(elem['temperature'])
+                d_h_2.append(elem['hum'])
+                d_hg_2.append(elem['hum_ground'])
+            elif elem['id_sensor'] == 3:
+                d_t_3.append(elem['temperature'])
+                d_h_3.append(elem['hum'])
+                d_hg_3.append(elem['hum_ground'])
+            elif elem['id_sensor'] == 4:
+                d_t_4.append(elem['temperature'])
+                d_h_4.append(elem['hum'])
+                d_hg_4.append(elem['hum_ground'])
+            elif elem['id_sensor'] == 5:
+                d_t_5.append(elem['temperature'])
+                d_h_5.append(elem['hum'])
+                d_hg_5.append(elem['hum_ground'])
+            elif elem['id_sensor'] == 6:
+                d_t_6.append(elem['temperature'])
+                d_h_6.append(elem['hum'])
+                d_hg_6.append(elem['hum_ground'])
+            elif elem['id_sensor'] == 7:
+                d_t_7.append(elem['temperature'])
+                d_h_7.append(elem['hum'])
+                d_hg_7.append(elem['hum_ground'])
+
+    return d_t_1, d_t_2, d_t_3, d_t_4, d_t_5, d_t_6, d_t_7, d_h_1, d_h_2, d_h_3, d_h_3, d_h_4, d_h_5, d_h_6, \
+           d_h_7, d_hg_1, d_hg_2, d_hg_3, d_hg_4, d_hg_5, d_hg_6, d_hg_7
+
+
+def val_lim():
+    datas_t = []
+    datas_h = []
+    data_hground = []
+    for j in range(1, 8):
+        conter = db.get_values(j)
+        for elem in conter:
             datas_t.append(elem['temperature'])
             datas_h.append(elem['hum'])
             data_hground.append(elem['hum_ground'])
-    return times, datas_t, datas_h, data_hground
+
+    return datas_t, datas_h, data_hground
 
 
 @app.route('/')  # Отслеживание(переход) на главную страницу
 @app.route('/home')
 def main():
-    times, datas_t, datas_h, data_hground = values()
+    d_t_1, d_t_2, d_t_3, d_t_4, d_t_5, d_t_6, d_t_7, d_h_1, d_h_2, d_h_3, d_h_3, d_h_4, d_h_5, d_h_6, \
+    d_h_7, d_hg_1, d_hg_2, d_hg_3, d_hg_4, d_hg_5, d_hg_6, d_hg_7 = values()
     return render_template('index.html', title='Главная страница')
 
 
@@ -60,9 +113,11 @@ def data_entry():
 
 @app.route('/charts', methods=['GET', 'POST'])
 def charts():
-    times, datas_t, datas_h, data_hground = values()
-    return render_template('charts.html', title='Графики', label=times, values=datas_t, values2=datas_h,
-                           values3=data_hground, lenth=len(datas_t))
+    d_t_1, d_t_2, d_t_3, d_t_4, d_t_5, d_t_6, d_t_7, d_h_1, d_h_2, d_h_3, d_h_3, d_h_4, d_h_5, d_h_6, \
+    d_h_7, d_hg_1, d_hg_2, d_hg_3, d_hg_4, d_hg_5, d_hg_6, d_hg_7 = values()
+    return render_template('charts.html', title='Графики', temp=d_t_1, temp=d_t_2,
+                           temp=d_t_3, temp=d_t_4, temp=d_t_5, temp=d_t_6, temp=d_t_7, hum1=d_h_1, hum2=d_h_2, hum3=d_h_3, hum4=d_h_4, hum=d_h_5, hum=d_h_6, hum=d_h_7,
+                           hum_ground1= d_hg_1, hum_ground2= d_hg_2, hum_ground3= d_hg_3, hum_ground4= d_hg_4, hum_ground5= d_hg_5, hum_ground6= d_hg_6, hum_ground7= d_hg_7, lenth=25)
 
 
 @app.route('/lim', methods=['GET', 'POST'])
@@ -111,7 +166,7 @@ def control():
         flag_t = True
         flag_h = True
         flag_dh = True
-        times, datas_t, datas_h, data_hground = values()
+        datas_t, datas_h, data_hground = val_lim()
         with open('limits', 'r', encoding='UTF-8') as file_lims:
             values_lims = list(map(int, file_lims.readlines()[0].split()))
             if mean(datas_t) < int(values_lims[0]):
@@ -130,10 +185,11 @@ def control():
 
 @app.route('/tables')
 def tables():
-    times, datas_t, datas_h, data_hground = values()
-    return render_template('tables.html', title='Таблица', lenth=len(datas_t), label=times, values=datas_t,
-                           values2=datas_h,
-                           values3=data_hground)
+    d_t_1, d_t_2, d_t_3, d_t_4, d_t_5, d_t_6, d_t_7, d_h_1, d_h_2, d_h_3, d_h_3, d_h_4, d_h_5, d_h_6, \
+    d_h_7, d_hg_1, d_hg_2, d_hg_3, d_hg_4, d_hg_5, d_hg_6, d_hg_7 = values()
+    return render_template('tables.html', title='Таблица', lenth=25, temp=d_t_1, temp=d_t_2,
+                           temp=d_t_3, temp=d_t_4, temp=d_t_5, temp=d_t_6, temp=d_t_7, hum1=d_h_1, hum2=d_h_2, hum3=d_h_3, hum4=d_h_4, hum=d_h_5, hum=d_h_6, hum=d_h_7,
+                           hum_ground1= d_hg_1, hum_ground2= d_hg_2, hum_ground3= d_hg_3, hum_ground4= d_hg_4, hum_ground5= d_hg_5, hum_ground6= d_hg_6, hum_ground7= d_hg_7)
 
 
 if __name__ == '__main__':  # условие запуска локального сервера
