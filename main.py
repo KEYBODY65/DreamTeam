@@ -155,4 +155,5 @@ def etra_control():
 
 
 if __name__ == '__main__':  # условие запуска локального сервера
+    db.create_tables()
     app.run(debug=True)  # debug стоит временно, он показывает все ошибки на самой странице

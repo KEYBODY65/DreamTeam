@@ -1,6 +1,6 @@
 from db.sqliteplus import sqlite_dict
 import sqlite3
-
+import os
 
 class Database_API:
     def __init__(self, name_db):
@@ -17,21 +17,24 @@ class Database_API:
                 conn.commit()
 
     def create_tables(self):
-        self.connect(
-            'CREATE TABLE IF NOT EXISTS sensor_id (name TEXT, id int, CONSTRAINT sensor_id_pk PRIMARY KEY (id));')
-        self.connect(
-            'CREATE TABLE IF NOT EXISTS sensor_values (id_sensor int, id int, temperature real, hum real, hum_ground real, n_time time, CONSTRAINT'
-            ' sensor_values_pk PRIMARY KEY (id), CONSTRAINT sensor_id_fk FOREIGN KEY (id_sensor) REFERENCES sensor_id(id));')
-        self.connect('INSERT INTO sensor_id (name, id) VALUES(\'humidification_sensor1\', 0);')
-        self.connect('INSERT INTO sensor_id (name, id) VALUES(\'tem_sensor1\', 1);')
-        self.connect('INSERT INTO sensor_id (name, id) VALUES(\'humidification_sensor2\', 2);')
-        self.connect('INSERT INTO sensor_id (name, id) VALUES(\'tem_sensor2\', 3);')
-        self.connect('INSERT INTO sensor_id (name, id) VALUES(\'humidification_sensor3\', 4);')
-        self.connect('INSERT INTO sensor_id (name, id) VALUES(\'tem_sensor3\', 5);')
-        self.connect('INSERT INTO sensor_id (name, id) VALUES(\'humidification_sensor4\', 6);')
-        self.connect('INSERT INTO sensor_id (name, id) VALUES(\'tem_sensor4\', 7);')
-        self.connect('INSERT INTO sensor_id (name, id) VALUES(\'auto_door\', 8);')
-        self.connect('INSERT INTO sensor_id (name, id) VALUES(\'watringa\', 9);')
+        if not os.path.exists(self.name_db):
+            with open(self.name_db, "w+"):
+                pass
+            self.connect(
+                'CREATE TABLE IF NOT EXISTS sensor_id (name TEXT, id int, CONSTRAINT sensor_id_pk PRIMARY KEY (id));')
+            self.connect(
+                'CREATE TABLE IF NOT EXISTS sensor_values (id_sensor int, id int, temperature real, hum real, hum_ground real, n_time time, CONSTRAINT'
+                ' sensor_values_pk PRIMARY KEY (id), CONSTRAINT sensor_id_fk FOREIGN KEY (id_sensor) REFERENCES sensor_id(id));')
+            self.connect('INSERT INTO sensor_id (name, id) VALUES(\'humidification_sensor1\', 0);')
+            self.connect('INSERT INTO sensor_id (name, id) VALUES(\'tem_sensor1\', 1);')
+            self.connect('INSERT INTO sensor_id (name, id) VALUES(\'humidification_sensor2\', 2);')
+            self.connect('INSERT INTO sensor_id (name, id) VALUES(\'tem_sensor2\', 3);')
+            self.connect('INSERT INTO sensor_id (name, id) VALUES(\'humidification_sensor3\', 4);')
+            self.connect('INSERT INTO sensor_id (name, id) VALUES(\'tem_sensor3\', 5);')
+            self.connect('INSERT INTO sensor_id (name, id) VALUES(\'humidification_sensor4\', 6);')
+            self.connect('INSERT INTO sensor_id (name, id) VALUES(\'tem_sensor4\', 7);')
+            self.connect('INSERT INTO sensor_id (name, id) VALUES(\'auto_door\', 8);')
+            self.connect('INSERT INTO sensor_id (name, id) VALUES(\'watringa\', 9);')
 
     def create_recort(self, id_sensor: int, temperature: float, hum: float, hum_ground: float):
         last_id = self.connect('SELECT id+1 FROM sensor_values ORDER BY id DESC LIMIT 1;', fetchall=True)

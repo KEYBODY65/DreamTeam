@@ -48,6 +48,7 @@ a {
  }
 
 .base_body {
+    display: flex;
     position: absolute;
     border-radius: 10px;
     top: 2%;
@@ -135,4 +136,7 @@ hr {
 .chart{
     color: black;
     font-size:19px;
+}
+table{
+    margin: 10px;
 }
