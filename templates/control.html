@@ -3,29 +3,29 @@
 <div class = 'button_place'>
         <div class="form-group">
             {% if flag_t %}
-            <button class="btn" type="submit">Открыть дверь</button>
+            <button class="btn" type="submit" id="door_open">Открыть дверь</button>
             {% else %}
             <button disabled class="button_disabled" type="submit">Открыть дверь</button>
             {% endif %}
         </div>
     <div class="form-group">
             {% if flag_t %}
-            <button class="btn" type="submit">Закрыть дверь</button>
+            <button class="btn" type="submit" id="door_close">Закрыть дверь</button>
             {% else %}
-            <button disabled class="button_disabled" type="submit">Закрыть дверь</button>
+            <button disabled class="button_disabled" type="submit" >Закрыть дверь</button>
             {% endif %}
         </div>
     <br>
     <div class="form-group">
             {% if flag_h %}
-            <button class="btn" type="submit">Включить увлажнение</button>
+            <button class="btn" type="submit" id="hum_on">Включить увлажнение</button>
             {% else %}
             <button disabled class="button_disabled" type="submit">Включить увлажнение</button>
             {% endif %}
         </div>
     <div class="form-group">
             {% if flag_h %}
-            <button class="btn" type="submit">Выключить увлажнение</button>
+            <button class="btn" type="submit" id="hum_off">Выключить увлажнение</button>
             {% else %}
             <button disabled class="button_disabled" type="submit">Выключить увлажнение</button>
             {% endif %}
@@ -34,13 +34,13 @@
     <div class="form-group">
         <input class="form-control item" type="number" name="idi_of_wtringa" minlength="1" id="idi_of_wtringa" placeholder="Номер бороздки" required>
             {% if flag_dh %}
-            <button class="btn" type="submit">Включить полив бороздки</button>
+            <button class="btn" type="submit" id="watringa_on">Включить полив бороздки</button>
             {% else %}
             <button disabled class="button_disabled" type="submit">Включить полив бороздки</button>
             {% endif %}
 
             {% if flag_dh %}
-            <button class="btn" type="submit">Выключить полив</button>
+            <button class="btn" type="submit" id="watringa_off">Выключить полив</button>
             {% else %}
             <button disabled class="button_disabled" type="submit">Выключить полив</button>
             {% endif %}
@@ -48,16 +48,21 @@
     <br>
     <div class="form-group">
             {% if flag_dh %}
-            <button class="btn" type="submit">Включить полив всех бороздок</button>
+            <button class="btn" type="submit" id="watringa_all_on">Включить полив всех бороздок</button>
             {% else %}
             <button disabled class="button_disabled" type="submit">Включить полив всех бороздок</button>
             {% endif %}
 
             {% if flag_dh %}
-            <button class="btn" type="submit">Выключить полив всех бороздок</button>
+            <button class="btn" type="submit" id="watringa_all_off">Выключить полив всех бороздок</button>
             {% else %}
             <button disabled class="button_disabled" type="submit">Выключить полив всех бороздок</button>
             {% endif %}
         </div>
-    </div>
+</div>
+<div>
+    <button class='btn_extra' type="submit" id="extra_control"> Разблокировать управление </button>
+
+</div>
+
 {% endblock %}

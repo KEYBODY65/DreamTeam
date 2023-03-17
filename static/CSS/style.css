@@ -49,6 +49,8 @@ a {
 
 .base_body {
     display: flex;
+    justify-content: center;
+    align-items: center;
     position: absolute;
     border-radius: 10px;
     top: 2%;
@@ -61,10 +63,8 @@ a {
 
 .registration-cssave form {
     position: relative;
-    left: 300px;
     width: 200px;
     height: 400px;
-    margin-top: 5%;
     padding:50px 70px;
     border-radius: 10px;
     box-shadow:4px 4px 15px rgba(0, 0, 0, 0.2);
