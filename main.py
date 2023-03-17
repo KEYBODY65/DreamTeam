@@ -54,7 +54,7 @@ def values():
                 d_hg_4.append(elem['hum_ground'])
 
     return d_t_1, d_t_2, d_t_3, d_t_4, d_h_1, d_h_2, d_h_3, d_h_3, d_h_4, \
-          d_hg_1, d_hg_2, d_hg_3, d_hg_4, times
+           d_hg_1, d_hg_2, d_hg_3, d_hg_4, times
 
 
 def val_lim():
@@ -75,7 +75,7 @@ def val_lim():
 @app.route('/home')
 def main():
     d_t_1, d_t_2, d_t_3, d_t_4, d_h_1, d_h_2, d_h_3, d_h_3, d_h_4, \
-        d_hg_1, d_hg_2, d_hg_3, d_hg_4, times = values()
+    d_hg_1, d_hg_2, d_hg_3, d_hg_4, times = values()
     return render_template('index.html', title='Главная страница')
 
 
@@ -169,9 +169,9 @@ def control():
 
 @app.route('/tables')
 def tables():
-    d_t_1, d_t_2, d_t_3, d_t_4, d_h_1, d_h_2, d_h_3, d_h_3, d_h_4,\
+    d_t_1, d_t_2, d_t_3, d_t_4, d_h_1, d_h_2, d_h_3, d_h_3, d_h_4, \
     d_hg_1, d_hg_2, d_hg_3, d_hg_4, times = values()
-    return render_template('tables.html', title='Таблица',  times=times,
+    return render_template('tables.html', title='Таблица', times=times,
                            temp1=d_t_1, temp2=d_t_2, temp3=d_t_3, temp4=d_t_4,
                            hum1=d_h_1, hum2=d_h_2, hum3=d_h_3, hum4=d_h_4,
                            hum_ground1=d_hg_1, hum_ground2=d_hg_2,
