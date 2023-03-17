@@ -117,15 +117,7 @@ footer p {
   justify-content: center;
   white-space: normal;
 }
-.button {
-    background-color:#001752;
-    margin: 4em;
-    color: white;
-    font-weight: bold;
-    border-radius: 10px;
-    font-size:18px;
-    box-shadow:4px 4px 15px rgba(0, 0.6, 0.6, 0.6);
-}
+
 hr {
     width: 85%;
     box-shadow: 3px 4px 3px black;

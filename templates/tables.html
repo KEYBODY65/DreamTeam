@@ -1,5 +1,10 @@
 {% extends 'base.html' %}
 {% block table_block %}
+<div class="button-tw">
+    <button class="table"><a href="/charts" class="a-table">Вернуться</a></button>
+    <button class="table"><a href="/tables" class="a-table">Таблица</a></button>
+
+</div>
 <table border="1px solid black">
     <thead>
         <tr>
@@ -16,7 +21,7 @@
         </tr>
     </thead>
     <tbody>
-    {% for i in range(lenth) %}
+    {% for i in range(lenth - 1, lenth - 10, -1) %}
             <form method="post">
                 <tr>
                     <th>
@@ -36,4 +41,5 @@
     {% endfor %}
     </tbody>
 </table>
+
 {% endblock %}

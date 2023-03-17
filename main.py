@@ -19,11 +19,10 @@ data_hground = []
 
 
 def values():
-    if '00:00:00' in times:
-        times.clear()
-        datas_t.clear()
-        datas_h.clear()
-        data_hground.clear()
+    times.clear()
+    datas_t.clear()
+    datas_h.clear()
+    data_hground.clear()
     for j in range(1, 8):
         conter = db.get_values(j)
         for elem in conter:
@@ -34,8 +33,6 @@ def values():
 
 
 values()
-lenth = len(datas_t)
-print(lenth)
 
 
 @app.route('/')  # Отслеживание(переход) на главную страницу
@@ -59,11 +56,12 @@ def data_entry():
     return render_template('dataentry.html', title='Ручное внесение данных', form=form)
 
 
-@app.route('/charts')
+@app.route('/charts', methods=['GET', 'POST'])
 def charts():
+    if request.method == 'POST':
+        values()
     return render_template('charts.html', title='Графики', label=times, values=datas_t, values2=datas_h,
-                           values3=data_hground)
-
+                           values3=data_hground, lenth=len(datas_t))
 
 
 @app.route('/lim', methods=['GET', 'POST'])
@@ -86,10 +84,10 @@ def control():
     formas = Control()
     if Control.door_open:
         patch('https://dt.miet.ru/ppo_it/api/fork_drive/ https://dt.miet.ru/ppo_it/api/fork_drive/',
-                params={"state": 1})
+              params={"state": 1})
         if Control.door_close:
             patch('https://dt.miet.ru/ppo_it/api/fork_drive/ https://dt.miet.ru/po_it/api/fork_drive/',
-                    params={"state": 0})
+                  params={"state": 0})
     elif Control.hum_on:
         patch('https://dt.miet.ru/ppo_it/api/total_hum', params={"state": 1})
         if Control.hum_off:
@@ -135,7 +133,14 @@ def control():
 
 @app.route('/tables')
 def tables():
-    return render_template('tables.html', title='Таблица')
+    return render_template('tables.html', title='Таблица', lenth=len(datas_t), label=times, values=datas_t,
+                           values2=datas_h,
+                           values3=data_hground)
+
+
+@app.route('/extra', methods=['GET', 'POST'])
+def etra_control():
+    pass  # Сделать экстренное управление
 
 
 if __name__ == '__main__':  # условие запуска локального сервера

@@ -17,6 +17,9 @@ class Entry_Lims(FlaskForm):
     Hb = StringField("Hb%")
     Submit_button = SubmitField("Указать")
 
+class update(FlaskForm):
+    update = SubmitField("Обновить")
+
 
 class Control(FlaskForm):
     hum_on = SubmitField('Увалжанить')
