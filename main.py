@@ -15,31 +15,22 @@ def values():
         db.create_recort(id_sensor=(i - 1) * 2, temperature=data['temperature'], hum=data["humidity"],
                          hum_ground=data['humidity'])
     times = []
-    d_t_1, d_t_2, d_t_3, d_t_4, d_t_5, d_t_6, d_t_7 = [], [], [], [], [], [], []
-    d_h_1, d_h_2, d_h_3, d_h_4, d_h_5, d_h_6, d_h_7 = [], [], [], [], [], [], []
-    d_hg_1, d_hg_2, d_hg_3, d_hg_4, d_hg_5, d_hg_6, d_hg_7 = [], [], [], [], [], [], []
+    d_t_1, d_t_2, d_t_3, d_t_4 = [], [], [], []
+    d_h_1, d_h_2, d_h_3, d_h_4 = [], [], [], []
+    d_hg_1, d_hg_2, d_hg_3, d_hg_4 = [], [], [], []
     if len(d_t_1) == 25:
         d_t_1.clear()
         d_t_2.clear()
         d_t_3.clear()
         d_t_4.clear()
-        d_t_5.clear()
-        d_t_6.clear()
-        d_t_7.clear()
         d_h_1.clear()
         d_h_2.clear()
         d_h_3.clear()
         d_h_4.clear()
-        d_h_5.clear()
-        d_h_6.clear()
-        d_h_7.clear()
         d_hg_1.clear()
         d_hg_2.clear()
         d_hg_3.clear()
         d_hg_4.clear()
-        d_hg_5.clear()
-        d_hg_6.clear()
-        d_hg_7.clear()
     for j in range(1, 8):
         conter = db.get_values(j)
         for elem in conter:
@@ -60,21 +51,9 @@ def values():
                 d_t_4.append(elem['temperature'])
                 d_h_4.append(elem['hum'])
                 d_hg_4.append(elem['hum_ground'])
-            elif elem['id_sensor'] == 5:
-                d_t_5.append(elem['temperature'])
-                d_h_5.append(elem['hum'])
-                d_hg_5.append(elem['hum_ground'])
-            elif elem['id_sensor'] == 6:
-                d_t_6.append(elem['temperature'])
-                d_h_6.append(elem['hum'])
-                d_hg_6.append(elem['hum_ground'])
-            elif elem['id_sensor'] == 7:
-                d_t_7.append(elem['temperature'])
-                d_h_7.append(elem['hum'])
-                d_hg_7.append(elem['hum_ground'])
 
-    return d_t_1, d_t_2, d_t_3, d_t_4, d_t_5, d_t_6, d_t_7, d_h_1, d_h_2, d_h_3, d_h_3, d_h_4, d_h_5, d_h_6, \
-           d_h_7, d_hg_1, d_hg_2, d_hg_3, d_hg_4, d_hg_5, d_hg_6, d_hg_7, times
+    return d_t_1, d_t_2, d_t_3, d_t_4, d_h_1, d_h_2, d_h_3, d_h_3, d_h_4, \
+          d_hg_1, d_hg_2, d_hg_3, d_hg_4, times
 
 
 def val_lim():
@@ -94,8 +73,8 @@ def val_lim():
 @app.route('/')  # Отслеживание(переход) на главную страницу
 @app.route('/home')
 def main():
-    d_t_1, d_t_2, d_t_3, d_t_4, d_t_5, d_t_6, d_t_7, d_h_1, d_h_2, d_h_3, d_h_3, d_h_4, d_h_5, d_h_6, \
-    d_h_7, d_hg_1, d_hg_2, d_hg_3, d_hg_4, d_hg_5, d_hg_6, d_hg_7, times = values()
+    d_t_1, d_t_2, d_t_3, d_t_4, d_h_1, d_h_2, d_h_3, d_h_3, d_h_4, \
+        d_hg_1, d_hg_2, d_hg_3, d_hg_4, times = values()
     return render_template('index.html', title='Главная страница')
 
 
@@ -117,11 +96,12 @@ def data_entry():
 def charts():
     d_t_1, d_t_2, d_t_3, d_t_4, d_t_5, d_t_6, d_t_7, d_h_1, d_h_2, d_h_3, d_h_3, d_h_4, d_h_5, d_h_6, \
     d_h_7, d_hg_1, d_hg_2, d_hg_3, d_hg_4, d_hg_5, d_hg_6, d_hg_7, times = values()
-    return render_template('charts.html', title='Графики', times=times, temp1=d_t_1, temp2=d_t_2,
-                           temp3=d_t_3, temp4=d_t_4, temp5=d_t_5, temp6=d_t_6, temp7=d_t_7, hum1=d_h_1, hum2=d_h_2,
-                           hum3=d_h_3, hum4=d_h_4, hum5=d_h_5, hum6=d_h_6, hum7=d_h_7,
-                           hum_ground1=d_hg_1, hum_ground2=d_hg_2, hum_ground3=d_hg_3, hum_ground4=d_hg_4,
-                           hum_ground5=d_hg_5, hum_ground6=d_hg_6, hum_ground7=d_hg_7, lenth=25)
+    return render_template('charts.html', title='Графики', times=times,
+                           temp1=d_t_1, temp2=d_t_2, temp3=d_t_3, temp4=d_t_4,
+                           hum1=d_h_1, hum2=d_h_2, hum3=d_h_3, hum4=d_h_4,
+                           hum_ground1=d_hg_1, hum_ground2=d_hg_2,
+                           hum_ground3=d_hg_3, hum_ground4=d_hg_4,
+                           lenth=25)
 
 
 @app.route('/lim', methods=['GET', 'POST'])
@@ -189,13 +169,14 @@ def control():
 
 @app.route('/tables')
 def tables():
-    d_t_1, d_t_2, d_t_3, d_t_4, d_t_5, d_t_6, d_t_7, d_h_1, d_h_2, d_h_3, d_h_3, d_h_4, d_h_5, d_h_6, \
-    d_h_7, d_hg_1, d_hg_2, d_hg_3, d_hg_4, d_hg_5, d_hg_6, d_hg_7, times = values()
-    return render_template('tables.html', title='Таблица', lenth=25, times=times, temp1=d_t_1, temp2=d_t_2,
-                           temp3=d_t_3, temp4=d_t_4, temp5=d_t_5, temp6=d_t_6, temp7=d_t_7, hum1=d_h_1, hum2=d_h_2,
-                           hum3=d_h_3, hum4=d_h_4, hum5=d_h_5, hum6=d_h_6, hum7=d_h_7,
-                           hum_ground1=d_hg_1, hum_ground2=d_hg_2, hum_ground3=d_hg_3, hum_ground4=d_hg_4,
-                           hum_ground5=d_hg_5, hum_ground6=d_hg_6, hum_ground7=d_hg_7)
+    d_t_1, d_t_2, d_t_3, d_t_4, d_h_1, d_h_2, d_h_3, d_h_3, d_h_4,\
+    d_hg_1, d_hg_2, d_hg_3, d_hg_4, times = values()
+    return render_template('tables.html', title='Таблица',  times=times,
+                           temp1=d_t_1, temp2=d_t_2, temp3=d_t_3, temp4=d_t_4,
+                           hum1=d_h_1, hum2=d_h_2, hum3=d_h_3, hum4=d_h_4,
+                           hum_ground1=d_hg_1, hum_ground2=d_hg_2,
+                           hum_ground3=d_hg_3, hum_ground4=d_hg_4,
+                           lenth=25)
 
 
 if __name__ == '__main__':  # условие запуска локального сервера
