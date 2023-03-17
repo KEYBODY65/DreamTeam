@@ -60,6 +60,8 @@ a {
 
 .registration-cssave form {
     position: relative;
+    margin-top: 8%;
+    margin-left: 34%;
     width: 200px;
     height: 400px;
     padding:50px 70px;

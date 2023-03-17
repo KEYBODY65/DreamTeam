@@ -1,30 +1,39 @@
 {% extends 'base.html' %}
 {% block charts_block %}
 <div class="button-tw">
-    <input  type="button" onclick="table{{values, values2, values3, label}}" value="График" class="chart">
+    <button class="table"><a href="/charts" class="a-table">Графики</a></button>
     <button class="table"><a href="/tables" class="a-table">Таблица</a></button>
 
 </div>
 <div>
-        <canvas id="myChart"></canvas>
-      </div>
+    <input type="button" value="График 1 датчика" onclick="table1{{times, temp1, hum1, hum_ground1}}" class="chart">
+    <input type="button" value="График 2 датчика" onclick="table2{{times, temp2, hum2, hum_ground2}}" class="chart">
+    <input type="button" value="График 3 датчика" onclick="table3{{times, temp3, hum3, hum_ground3}}" class="chart">
+    <input type="button" onclick="table4{{times, temp4, hum4, hum_ground4}}" value="График 4 датчика" class="chart">
+</div>
+<div class="all_charts">
+    <canvas id="myChart1"></canvas> <!--Первый график-->
+    <canvas id="myChart2"></canvas> <!--Второй график-->
+    <canvas id="myChart3"></canvas> <!--Третий график-->
+    <canvas id="myChart4"></canvas> <!--Четвертый график-->
+</div>
 
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
     const data_count = {{ lenth }};
-    const label = [];
+    const list = [];
     for (let i = 0; i < data_count; ++i) {
-    label.push(i.toString());
+    list.push(i.toString());
     }
-    labels = label.slice(-25)
+    labels = list
 
-    function table(data, data1, data2){
-        const ctx = document.getElementById('myChart').getContext('2d');
+    function table4(label, data, data1, data2){
+        const ctx = document.getElementById('myChart4').getContext('2d');
         let myChart = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: labels,
+            labels: label.slice(-25),
             datasets: [{
                 label: 'Температура теплицы',
                 data: data.slice(-25)
@@ -40,7 +49,91 @@
             plugins: {
             title: {
                 display: true,
-                text: 'График изменения данных'
+                text: 'График изменения данных датчика №4'
+            },
+            }
+        }
+        });
+    }
+
+    function table3(label, data, data1, data2){
+        const ctx = document.getElementById('myChart3').getContext('2d');
+        let myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: label.slice(-25),
+            datasets: [{
+                label: 'Температура теплицы',
+                data: data.slice(-25)
+            },{
+              label: 'Влажность теплицы',
+               data: data1.slice(-25)
+            },{
+              label: 'Влажность почвы',
+              data: data2.slice(-25)
+            }]
+        },
+        options: {
+            plugins: {
+            title: {
+                display: true,
+                text: 'График изменения данных датчика №3'
+            },
+            }
+        }
+        });
+    }
+
+    function table2 (label, data, data1, data2){
+        const ctx = document.getElementById('myChart2').getContext('2d');
+        let myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: label.slice(-25),
+            datasets: [{
+                label: 'Температура теплицы',
+                data: data.slice(-25)
+            },{
+              label: 'Влажность теплицы',
+               data: data1.slice(-25)
+            },{
+              label: 'Влажность почвы',
+              data: data2.slice(-25)
+            }]
+        },
+        options: {
+            plugins: {
+            title: {
+                display: true,
+                text: 'График изменения данных датчика №2'
+            },
+            }
+        }
+        });
+    }
+
+    function table1 (label, data, data1, data2){
+        const ctx = document.getElementById('myChart1').getContext('2d');
+        let myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: label.slice(-25),
+            datasets: [{
+                label: 'Температура теплицы',
+                data: data.slice(-25)
+            },{
+              label: 'Влажность теплицы',
+               data: data1.slice(-25)
+            },{
+              label: 'Влажность почвы',
+              data: data2.slice(-25)
+            }]
+        },
+        options: {
+            plugins: {
+            title: {
+                display: true,
+                text: 'График изменения данных №1'
             },
             }
         }

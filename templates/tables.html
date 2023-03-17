@@ -1,14 +1,13 @@
 {% extends 'base.html' %}
 {% block table_block %}
 <div class="button-tw">
-    <button class="table"><a href="/charts" class="a-table">Вернуться</a></button>
+    <button class="table"><a href="/charts" class="a-table">Графики</a></button>
     <button class="table"><a href="/tables" class="a-table">Таблица</a></button>
-
 </div>
 <table border="1px solid black">
     <thead>
         <tr>
-            <th width=50px></th>
+            <th width=50px> № Датчика </th>
             <th>
                 Датчик температуры
             </th>
@@ -21,24 +20,64 @@
         </tr>
     </thead>
     <tbody>
-    {% for i in range(lenth - 1, lenth - 9, -1) %}
-            <form method="post">
-                <tr>
-                    <th>
-                        <h2 > {{ label[i] }} </h2>
-                    </th>
-                    <th>
-                        {{ values[i] }}
-                    </th>
-                    <th>
-                        {{ values2[i] }}
-                    </th>
-                    <th>
-                        {{ values3[i] }}
-                    </th>
-                </tr>
-            </form>
-    {% endfor %}
+        <form method="post">
+            <tr>
+                <th>
+                    <h2> График 1 </h2>
+                </th>
+                <th>
+                    {{ temp1[-1] }}
+                </th>
+                <th>
+                    {{ hum1[-1] }}
+                </th>
+                <th>
+                    {{ hum_ground1[-1] }}
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    <h2> График 2 </h2>
+                </th>
+                <th>
+                    {{ temp2[-1] }}
+                </th>
+                <th>
+                    {{ hum2[-1] }}
+                </th>
+                <th>
+                    {{ hum_ground2[-1] }}
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    <h2> График №3 </h2>
+                </th>
+                <th>
+                    {{ temp3[-1] }}
+                </th>
+                <th>
+                    {{ hum3[-1] }}
+                </th>
+                <th>
+                    {{ hum_ground3[-1] }}
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    <h2> График №4 </h2>
+                </th>
+                <th>
+                    {{ temp4[-1] }}
+                </th>
+                <th>
+                    {{ hum4[-1] }}
+                </th>
+                <th>
+                    {{ hum_ground4[-1] }}
+                </th>
+            </tr>
+        </form>
     </tbody>
 </table>
 
