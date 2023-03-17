@@ -18,7 +18,8 @@ def values():
     d_t_1, d_t_2, d_t_3, d_t_4 = [], [], [], []
     d_h_1, d_h_2, d_h_3, d_h_4 = [], [], [], []
     d_hg_1, d_hg_2, d_hg_3, d_hg_4 = [], [], [], []
-    if len(d_t_1) == 25:
+    if '00:00:00' in times:
+        times.clear()
         d_t_1.clear()
         d_t_2.clear()
         d_t_3.clear()
