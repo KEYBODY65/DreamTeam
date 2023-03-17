@@ -2,7 +2,7 @@ from flask import Flask, render_template, request
 from requests import get, patch
 from db.db_ap import Database_API
 from statistics import mean
-from data_entry import DataEntry, Control, Entry_Lims
+from data_entry import DataEntry, Control, Entry_Lims, Extra_Control
 
 db = Database_API('./db/database.db')
 app = Flask(__name__)  # создаём объект класса Flask
@@ -19,10 +19,11 @@ data_hground = []
 
 
 def values():
-    times.clear()
-    datas_t.clear()
-    datas_h.clear()
-    data_hground.clear()
+    if '00:00:00' in times:
+        times.clear()
+        datas_t.clear()
+        datas_h.clear()
+        data_hground.clear()
     for j in range(1, 8):
         conter = db.get_values(j)
         for elem in conter:
@@ -32,12 +33,10 @@ def values():
             data_hground.append(elem['hum_ground'])
 
 
-values()
-
-
 @app.route('/')  # Отслеживание(переход) на главную страницу
 @app.route('/home')
 def main():
+    values()
     return render_template('index.html', title='Главная страница')
 
 
@@ -58,8 +57,7 @@ def data_entry():
 
 @app.route('/charts', methods=['GET', 'POST'])
 def charts():
-    if request.method == 'POST':
-        values()
+    values()
     return render_template('charts.html', title='Графики', label=times, values=datas_t, values2=datas_h,
                            values3=data_hground, lenth=len(datas_t))
 
@@ -108,23 +106,23 @@ def control():
     flag_dh = True
 
     def validate():
+        flag_t = True
+        flag_h = True
+        flag_dh = True
         with open('limits', 'r', encoding='UTF-8') as file_lims:
             values_lims = list(map(int, file_lims.readlines()[0].split()))
             if mean(datas_t) < int(values_lims[0]):
                 flag_t = False
-                if not flag_t:
-                    flag_h = True
-                    flag_dh = True
+                flag_h = True
+                flag_dh = True
             elif mean(datas_h) > int(values_lims[1]):
                 flag_h = False
-                if not flag_h:
-                    flag_t = True
-                    flag_dh = True
+                flag_t = True
+                flag_dh = True
             elif mean(data_hground) > int(values_lims[-1]):
                 flag_dh = False
-                if not flag_dh:
-                    flag_h = True
-                    flag_t = True
+                flag_h = True
+                flag_t = True
         return flag_t, flag_h, flag_dh
 
     validate()
@@ -133,14 +131,27 @@ def control():
 
 @app.route('/tables')
 def tables():
+    values()
     return render_template('tables.html', title='Таблица', lenth=len(datas_t), label=times, values=datas_t,
                            values2=datas_h,
                            values3=data_hground)
 
 
+
 @app.route('/extra', methods=['GET', 'POST'])
 def etra_control():
-    pass  # Сделать экстренное управление
+    f = Extra_Control()
+    if Extra_Control.d_open:
+        patch('https://dt.miet.ru/ppo_it/api/fork_drive/ https://dt.miet.ru/ppo_it/api/fork_drive/',
+              params={"state": 1})
+        if Extra_Control.d_close:
+            patch('https://dt.miet.ru/ppo_it/api/fork_drive/ https://dt.miet.ru/po_it/api/fork_drive/',
+                  params={"state": 0})
+    elif Control.hum_on:
+        patch('https://dt.miet.ru/ppo_it/api/total_hum', params={"state": 1})
+        if Control.hum_off:
+            patch('https://dt.miet.ru/ppo_it/api/total_hum', params={"state": 0})
+
 
 
 if __name__ == '__main__':  # условие запуска локального сервера
