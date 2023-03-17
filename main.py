@@ -7,18 +7,20 @@ from data_entry import DataEntry, Control, Entry_Lims
 db = Database_API('./db/database.db')
 app = Flask(__name__)  # создаём объект класса Flask
 app.config["SECRET_KEY"] = "secret_key"
-for i in range(1, 5):
-    data = get(f"https://dt.miet.ru/ppo_it/api/temp_hum/{i}").json()  # кидаем Гет запрос
-    db.create_recort(id_sensor=(i - 1) * 2, temperature=data['temperature'], hum=data["humidity"],
-                     hum_ground=data['humidity'])
 
-times = []
-datas_t = []
-datas_h = []
-data_hground = []
+
+
 
 
 def values():
+    for i in range(1, 5):
+        data = get(f"https://dt.miet.ru/ppo_it/api/temp_hum/{i}").json()  # кидаем Гет запрос
+        db.create_recort(id_sensor=(i - 1) * 2, temperature=data['temperature'], hum=data["humidity"],
+                         hum_ground=data['humidity'])
+    times = []
+    datas_t = []
+    datas_h = []
+    data_hground = []
     if '00:00:00' in times:
         times.clear()
         datas_t.clear()
@@ -27,16 +29,18 @@ def values():
     for j in range(1, 8):
         conter = db.get_values(j)
         for elem in conter:
+            print(elem)
             times.append(elem['n_time'])
             datas_t.append(elem['temperature'])
             datas_h.append(elem['hum'])
             data_hground.append(elem['hum_ground'])
+    return times, datas_t, datas_h, data_hground
 
 
 @app.route('/')  # Отслеживание(переход) на главную страницу
 @app.route('/home')
 def main():
-    values()
+    times, datas_t, datas_h, data_hground = values()
     return render_template('index.html', title='Главная страница')
 
 
@@ -56,7 +60,7 @@ def data_entry():
 
 @app.route('/charts', methods=['GET', 'POST'])
 def charts():
-    values()
+    times, datas_t, datas_h, data_hground = values()
     return render_template('charts.html', title='Графики', label=times, values=datas_t, values2=datas_h,
                            values3=data_hground, lenth=len(datas_t))
 
@@ -107,6 +111,7 @@ def control():
         flag_t = True
         flag_h = True
         flag_dh = True
+        times, datas_t, datas_h, data_hground = values()
         with open('limits', 'r', encoding='UTF-8') as file_lims:
             values_lims = list(map(int, file_lims.readlines()[0].split()))
             if mean(datas_t) < int(values_lims[0]):
@@ -125,7 +130,7 @@ def control():
 
 @app.route('/tables')
 def tables():
-    values()
+    times, datas_t, datas_h, data_hground = values()
     return render_template('tables.html', title='Таблица', lenth=len(datas_t), label=times, values=datas_t,
                            values2=datas_h,
                            values3=data_hground)

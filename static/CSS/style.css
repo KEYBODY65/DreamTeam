@@ -48,9 +48,6 @@ a {
  }
 
 .base_body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     position: absolute;
     border-radius: 10px;
     top: 2%;

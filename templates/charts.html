@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block charts_block %}
 <div class="button-tw">
-    <input  type="button" onclick="table{{values, values2, values3}}" value="График" class="chart">
+    <input  type="button" onclick="table{{values, values2, values3, label}}" value="График" class="chart">
     <button class="table"><a href="/tables" class="a-table">Таблица</a></button>
 
 </div>
@@ -17,7 +17,7 @@
     for (let i = 0; i < data_count; ++i) {
     label.push(i.toString());
     }
-    labels = label.slice(-50)
+    labels = label.slice(-25)
 
     function table(data, data1, data2){
         const ctx = document.getElementById('myChart').getContext('2d');
@@ -27,13 +27,13 @@
             labels: labels,
             datasets: [{
                 label: 'Температура теплицы',
-                data: data.slice(-50)
+                data: data.slice(-25)
             },{
               label: 'Влажность теплицы',
-               data: data1.slice(-50)
+               data: data1.slice(-25)
             },{
               label: 'Влажность почвы',
-              data: data2.slice(-50)
+              data: data2.slice(-25)
             }]
         },
         options: {
