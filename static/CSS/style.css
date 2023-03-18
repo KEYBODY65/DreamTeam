@@ -139,3 +139,11 @@ hr {
 table{
     margin: 10px;
 }
+.greeting{
+    height: 96.79%;
+    border-radius: 1px solid black;
+    opacity: 0.8;
+    color: #4af0c9;
+    font-family: 'Bebas Neue';
+    background-image: url("https://tvoya-banya.ru/wp-content/uploads/2019/06/post_5d14b1f76f0d4.jpg")
+}

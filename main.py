@@ -142,11 +142,8 @@ def control():
         if formas.watringa_all_off:
             for j in range(1, 7):
                 patch('https://dt.miet.ru/ppo_it/api/watering', params={'id': j, 'state': 0})
-    flag_t = True
-    flag_h = True
-    flag_dh = True
 
-    def validate():
+    def validate(formas):
         flag_t = True
         flag_h = True
         flag_dh = True
@@ -154,16 +151,20 @@ def control():
         with open('limits', 'r', encoding='UTF-8') as file_lims:
             values_lims = list(map(int, file_lims.readlines()[0].split()))
             if mean(datas_t) < int(values_lims[0]):
-                flag_t, flag_h, flag_dh = False, True, True
-            elif mean(datas_h) > int(values_lims[1]):
-                flag_h, flag_t, flag_dh = False, True, True
-            elif mean(data_hground) > int(values_lims[-1]):
-                flag_dh, flag_h, flag_h = False, True, True
+                flag_t = False
+            if mean(datas_h) > int(values_lims[1]):
+                flag_h = False
+            if mean(data_hground) > int(values_lims[-1]):
+                flag_dh = False
+            if request.method == 'POST':
+                flag_t = True
+                flag_h = True
+                flag_dh = True
         return flag_t, flag_h, flag_dh
-
-    validate()
-    if Control.extra_control:
-        flag_t, flag_h, flag_dh = True, True, True
+    flag_t, flag_h, flag_dh = validate(formas)
+    print(flag_t)
+    print(flag_h)
+    print(flag_dh)
     return render_template('control.html', form=formas, flag_t=flag_t, flag_h=flag_h, flag_dh=flag_dh)
 
 
